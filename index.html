@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>iPhone iOS 17 Screen</title>
+<title>iPhone iOS Screen</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display-chrome');
 
@@ -27,7 +28,6 @@ html, body {
   user-select: none;
 }
 
-/* Screen Container (Tanpa Frame Hitam Tebal) */
 .phone-screen {
   position: relative;
   width: 100%;
@@ -39,7 +39,7 @@ html, body {
   flex-direction: column;
 }
 
-/* Wallpaper Sesuai Tautan Kamu */
+/* Wallpaper GitHub Kamu */
 .wallpaper {
   position: absolute;
   inset: 0;
@@ -49,14 +49,12 @@ html, body {
   background-position: center;
 }
 
-/* Dynamic Island Pas Di Atas Statusbar */
+/* Dynamic Island */
 .dynamic-island {
-  position: absolute;
-  top: 7px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  margin: 8px auto 0;
   width: 110px;
-  height: 30px;
+  height: 28px;
   background: #000;
   border-radius: 20px;
   z-index: 25;
@@ -64,6 +62,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
+  flex-shrink: 0;
 }
 
 .camera-lens {
@@ -76,41 +75,41 @@ html, body {
 
 /* Status Bar */
 .statusbar {
-  height: 44px;
-  padding: 12px 24px 0;
+  padding: 4px 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 600;
   color: #fff;
   z-index: 20;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  flex-shrink: 0;
 }
 
 .status-right {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
-/* Widget Container */
+/* Widget Weather Cupertino */
 .widget-container {
-  margin: 8px 16px 0;
+  margin: 6px 16px 0;
   z-index: 10;
+  flex-shrink: 0;
 }
 
-/* Weather Widget Sesuai Gambar Canva (Ada Jam-jaman) */
 .weather-widget {
-  background: rgba(40, 40, 45, 0.48);
+  background: rgba(35, 35, 40, 0.55);
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 22px;
   padding: 12px 16px;
   color: white;
-  border: 0.5px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 .weather-header {
@@ -119,75 +118,50 @@ html, body {
   align-items: flex-start;
 }
 
-.city {
-  font-size: 13px;
-  font-weight: 500;
-  opacity: 0.85;
-}
+.city { font-size: 13px; font-weight: 500; opacity: 0.9; }
+.temp-large { font-size: 36px; font-weight: 200; line-height: 1; margin-top: 2px; }
+.weather-right { text-align: right; }
+.cond { font-size: 11px; font-weight: 500; opacity: 0.9; }
+.hl { font-size: 10.5px; opacity: 0.75; margin-top: 2px; }
 
-.temp-large {
-  font-size: 38px;
-  font-weight: 200;
-  line-height: 1;
-  margin-top: 1px;
-}
-
-.weather-right {
-  text-align: right;
-}
-
-.cond {
-  font-size: 11px;
-  font-weight: 500;
-  opacity: 0.85;
-}
-
-.hl {
-  font-size: 10.5px;
-  opacity: 0.7;
-  margin-top: 2px;
-}
-
-/* Hourly Forecast Baris Bawah Widget */
 .hourly-forecast {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 8px;
   padding-top: 8px;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.15);
+  border-top: 0.5px solid rgba(255, 255, 255, 0.2);
 }
 
 .hour-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   font-size: 10px;
   font-weight: 500;
 }
-
 .hour-item span:first-child { opacity: 0.75; }
-.hour-icon { font-size: 11px; margin: 1px 0; }
 
 .widget-label {
   font-size: 10.5px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 4px;
-  margin-left: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 3px;
+  margin-left: 10px;
   font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
 /* Grid Layout Utama */
 .main-content {
-  padding: 12px 16px 0;
+  padding: 10px 16px 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   flex: 1;
   z-index: 10;
+  overflow-y: auto;
 }
 
-/* Baris 1: WA, Calendar, & Sleep Sounds Widget */
 .grid-row-1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -202,21 +176,25 @@ html, body {
   cursor: pointer;
 }
 
-.app-icon-img {
-  width: 58px;
-  height: 58px;
+.icon-squircle {
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.22);
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 28px;
+  color: white;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.1s ease;
 }
 
-.app-box:active .app-icon-img {
-  transform: scale(0.88);
-}
+.app-box:active .icon-squircle { transform: scale(0.88); }
 
 .app-name {
-  margin-top: 5px;
+  margin-top: 4px;
   font-size: 11px;
   font-weight: 400;
   color: white;
@@ -225,55 +203,57 @@ html, body {
   white-space: nowrap;
 }
 
-/* Widget Sleep Sounds Medium */
+/* Desain Murni CSS Ikon iOS */
+.wa { background: #25d366; }
+.cal { background: #fff; color: #000; flex-direction: column; }
+.cal-day { font-size: 9px; color: #ff3b30; font-weight: 700; }
+.cal-date { font-size: 24px; font-weight: 300; line-height: 1; }
+
 .sleep-widget {
   grid-column: span 2;
   grid-row: span 2;
   background: linear-gradient(135deg, #5b31d0 0%, #321683 100%);
   border-radius: 22px;
-  padding: 14px;
+  padding: 12px;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
 }
 
 .sleep-cover {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
   background: #111;
   background-image: radial-gradient(circle, #fff 10%, transparent 11%);
   background-size: 5px 5px;
 }
 
-.sleep-title { font-size: 13px; font-weight: 600; }
-.sleep-sub { font-size: 11.5px; opacity: 0.8; }
-
+.sleep-title { font-size: 12px; font-weight: 600; }
+.sleep-sub { font-size: 11px; opacity: 0.8; }
 .play-btn {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.25);
   border: 0;
   color: white;
-  padding: 5px 12px;
-  border-radius: 12px;
-  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 10.5px;
   font-weight: 600;
   width: fit-content;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
-/* Grid Baris Biasa (4 Kolom) */
 .grid-row-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
-/* Badge Merah Notifikasi */
 .badge {
   position: absolute;
   top: -3px;
@@ -289,55 +269,32 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 0 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
   z-index: 5;
 }
 
-/* Custom Calendar Icon (Tanggal 9 TUE) */
-.calendar-icon {
-  width: 58px;
-  height: 58px;
-  background: #fff;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.22);
+.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.xapp { background: #000; color: #fff; font-weight: bold; border: 0.5px solid rgba(255,255,255,0.2); }
+.spotify { background: #1ed760; color: #000; }
+.photos { background: #fff; }
+.photos-flower {
+  background: conic-gradient(#ff3b30, #ff9f0a, #ffd60a, #34c759, #007aff, #5856d6, #ff2d55, #ff3b30);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
 }
 
-.cal-day { font-size: 9.5px; color: #ff3b30; font-weight: 700; }
-.cal-date { font-size: 25px; font-weight: 300; color: #000; line-height: 1; }
+.notes { background: #fff; position: relative; }
+.notes-top { position: absolute; top: 0; left: 0; right: 0; height: 12px; background: #ffd60a; }
+.notes-line { width: 65%; height: 1.5px; background: #d1d1d6; margin-top: 10px; box-shadow: 0 5px 0 #d1d1d6, 0 10px 0 #d1d1d6; }
 
-/* Custom Notes Icon */
-.notes-icon {
-  width: 58px;
-  height: 58px;
-  background: #fff;
-  border-radius: 14px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.22);
-}
+.youtube { background: #fff; color: #ff0000; }
 
-.notes-header {
-  height: 13px;
-  background: #ffd60a;
-  width: 100%;
-}
-
-.notes-line {
-  width: 65%;
-  height: 1.5px;
-  background: #d1d1d6;
-  margin: 6px auto 0;
-  box-shadow: 0 5px 0 #d1d1d6, 0 10px 0 #d1d1d6;
-}
-
-/* Dock Bawah Glassmorphism */
+/* Dock Bawah */
 .dock-area {
-  padding: 0 12px 18px;
+  padding: 0 12px 14px;
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .dock {
@@ -346,22 +303,24 @@ html, body {
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   border-radius: 34px;
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.32);
   backdrop-filter: blur(35px) saturate(180%);
   -webkit-backdrop-filter: blur(35px) saturate(180%);
-  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  border: 0.5px solid rgba(255, 255, 255, 0.35);
 }
 
-.dock .app-name { display: none; }
+.camera { background: linear-gradient(180deg, #e5e5ea 0%, #c7c7cc 100%); color: #1c1c1e; }
+.calc { background: #2c2c2e; color: #ff9f0a; font-size: 24px; }
+.gmail { background: #fff; color: #ea4335; font-size: 26px; font-weight: 800; }
+.settings { background: linear-gradient(180deg, #8e8e93 0%, #636366 100%); color: #fff; }
 
-/* Home Indicator */
 .home-indicator {
   position: absolute;
-  bottom: 6px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
+  width: 130px;
+  height: 4.5px;
   border-radius: 10px;
   background: white;
   z-index: 30;
@@ -378,17 +337,17 @@ html, body {
     <div class="camera-lens"></div>
   </div>
 
-  <!-- Status Bar iOS -->
+  <!-- Status Bar -->
   <div class="statusbar">
     <span>9:41</span>
     <div class="status-right">
       <span>•••</span>
-      <span>📶</span>
-      <span>🔋</span>
+      <i class="fa-solid fa-wifi"></i>
+      <i class="fa-solid fa-battery-full" style="font-size: 13px;"></i>
     </div>
   </div>
 
-  <!-- Widget Cuaca Cupertino Sesuai Gambar Canva -->
+  <!-- Weather Widget -->
   <div class="widget-container">
     <div class="weather-widget">
       <div class="weather-header">
@@ -402,29 +361,29 @@ html, body {
         </div>
       </div>
       <div class="hourly-forecast">
-        <div class="hour-item"><span>2 PM</span><span class="hour-icon">☁️</span><span>61°</span></div>
-        <div class="hour-item"><span>3 PM</span><span class="hour-icon">☁️</span><span>62°</span></div>
-        <div class="hour-item"><span>4 PM</span><span class="hour-icon">☁️</span><span>61°</span></div>
-        <div class="hour-item"><span>5 PM</span><span class="hour-icon">☁️</span><span>62°</span></div>
-        <div class="hour-item"><span>6 PM</span><span class="hour-icon">☁️</span><span>62°</span></div>
-        <div class="hour-item"><span>7 PM</span><span class="hour-icon">☁️</span><span>61°</span></div>
+        <div class="hour-item"><span>2 PM</span><span>☁️</span><span>61°</span></div>
+        <div class="hour-item"><span>3 PM</span><span>☁️</span><span>62°</span></div>
+        <div class="hour-item"><span>4 PM</span><span>☁️</span><span>61°</span></div>
+        <div class="hour-item"><span>5 PM</span><span>☁️</span><span>62°</span></div>
+        <div class="hour-item"><span>6 PM</span><span>☁️</span><span>62°</span></div>
+        <div class="hour-item"><span>7 PM</span><span>☁️</span><span>61°</span></div>
       </div>
     </div>
     <div class="widget-label">Weather</div>
   </div>
 
-  <!-- Grid Utama Aplikasi -->
+  <!-- Main Grid -->
   <div class="main-content">
 
-    <!-- Baris 1: WhatsApp, Calendar & Widget Sleep Sounds -->
+    <!-- Row 1 -->
     <div class="grid-row-1">
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/150px-WhatsApp.svg.png" alt="WhatsApp">
+        <div class="icon-squircle wa"><i class="fa-brands fa-whatsapp"></i></div>
         <span class="app-name">WhatsApp</span>
       </div>
 
       <div class="app-box">
-        <div class="calendar-icon">
+        <div class="icon-squircle cal">
           <span class="cal-day">TUE</span>
           <span class="cal-date">9</span>
         </div>
@@ -434,45 +393,45 @@ html, body {
       <div class="sleep-widget">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div class="sleep-cover"></div>
-          <span style="font-size:12px; opacity:0.8;">✨</span>
+          <span style="font-size:11px; opacity:0.8;">✨</span>
         </div>
         <div>
           <div class="sleep-title">Sleep Sounds</div>
           <div class="sleep-sub">Sleep</div>
-          <button class="play-btn">▶ Play</button>
+          <button class="play-btn"><i class="fa-solid fa-play" style="font-size:9px;"></i> Play</button>
         </div>
       </div>
     </div>
 
-    <!-- Baris 2: Instagram (Badge 6) & X -->
+    <!-- Row 2 -->
     <div class="grid-row-4">
       <div class="app-box">
         <div class="badge">6</div>
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/150px-Instagram_logo_2016.svg.png" alt="Instagram">
+        <div class="icon-squircle ig"><i class="fa-brands fa-instagram"></i></div>
         <span class="app-name">Instagram</span>
       </div>
 
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.svg/150px-X_logo.svg.png" style="background:#000; padding:10px;" alt="X">
+        <div class="icon-squircle xapp">𝕏</div>
         <span class="app-name">X</span>
       </div>
     </div>
 
-    <!-- Baris 3: Spotify, Photos, Notes, YouTube (Badge 4) -->
+    <!-- Row 3 -->
     <div class="grid-row-4">
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/150px-Spotify_logo_without_text.svg.png" style="background:#000;" alt="Spotify">
+        <div class="icon-squircle spotify"><i class="fa-brands fa-spotify"></i></div>
         <span class="app-name">Spotify</span>
       </div>
 
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Apple_Photos_icon.svg/150px-Apple_Photos_icon.svg.png" alt="Photos">
+        <div class="icon-squircle photos"><i class="fa-solid fa-asterisk photos-flower"></i></div>
         <span class="app-name">Photos</span>
       </div>
 
       <div class="app-box">
-        <div class="notes-icon">
-          <div class="notes-header"></div>
+        <div class="icon-squircle notes">
+          <div class="notes-top"></div>
           <div class="notes-line"></div>
         </div>
         <span class="app-name">Notes</span>
@@ -480,35 +439,34 @@ html, body {
 
       <div class="app-box">
         <div class="badge">4</div>
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/150px-YouTube_full-color_icon_%282017%29.svg.png" style="background:#fff; padding:8px;" alt="YouTube">
+        <div class="icon-squircle youtube"><i class="fa-brands fa-youtube"></i></div>
         <span class="app-name">YouTube</span>
       </div>
     </div>
 
   </div>
 
-  <!-- Dock Bawah: Camera, Calculator, Gmail, Settings -->
+  <!-- Dock -->
   <div class="dock-area">
     <div class="dock">
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/iOS_Camera_Icon.png/150px-iOS_Camera_Icon.png" alt="Camera">
+        <div class="icon-squircle camera"><i class="fa-solid fa-camera"></i></div>
       </div>
 
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Apple_Calculator_icon.png/150px-Apple_Calculator_icon.png" alt="Calculator">
+        <div class="icon-squircle calc"><i class="fa-solid fa-calculator"></i></div>
       </div>
 
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/150px-Gmail_icon_%282020%29.svg.png" style="background:#fff; padding:8px;" alt="Gmail">
+        <div class="icon-squircle gmail">M</div>
       </div>
 
       <div class="app-box">
-        <img class="app-icon-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/iOS_Settings_icon.png/150px-iOS_Settings_icon.png" alt="Settings">
+        <div class="icon-squircle settings"><i class="fa-solid fa-gear"></i></div>
       </div>
     </div>
   </div>
 
-  <!-- Home Indicator Bar -->
   <div class="home-indicator"></div>
 </main>
 
