@@ -1,165 +1,340 @@
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#d8cbb5">
 <title>Mavin's iPhone</title>
 <style>
+:root {
+  --text: #fff;
+  --glass: rgba(242, 239, 231, .43);
+  --blue: #087cff;
+}
 * { box-sizing: border-box; }
 
-body {
+html, body {
   margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: #17171b;
+  min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont,
-    "Helvetica Neue", sans-serif;
-  color: white;
+    "SF Pro Display", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
+body {
+  background: #ddd3c4;
+  color: white;
+  user-select: none;
+}
+
+button { font: inherit; cursor: pointer; }
+
 .phone {
-  width: min(100%, 390px);
-  height: min(844px, 100dvh);
-  min-height: 620px;
   position: relative;
+  width: 100%;
+  max-width: 430px;
+  height: 100dvh;
+  min-height: 650px;
+  margin: auto;
   overflow: hidden;
-  background: #222;
+  isolation: isolate;
+  background: #b9a990;
 }
 
 .wallpaper {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(#0002, #0005),
-    url("camera-wallpaper.jpg") center / cover no-repeat;
+  z-index: -2;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,.10), transparent 35%, rgba(0,0,0,.08)),
+    url("camera-wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
-.status {
-  position: relative;
+.statusbar {
+  height: 49px;
+  padding: 14px 27px 0;
   display: flex;
   justify-content: space-between;
-  padding: 14px 25px 0;
-  font-size: 14px;
-  font-weight: 600;
+  align-items: flex-start;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -.3px;
+  text-shadow: 0 1px 5px #0004;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.battery {
+  width: 23px;
+  height: 11px;
+  border: 1.4px solid white;
+  border-radius: 3px;
+  position: relative;
+  padding: 1px;
+}
+.battery::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 78%;
+  background: white;
+  border-radius: 1px;
+}
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  background: white;
+  border-radius: 0 2px 2px 0;
+}
+
+.clock-area {
+  text-align: center;
+  margin-top: 25px;
+  text-shadow: 0 2px 12px #0003;
+}
+
+.date {
+  font-size: 19px;
+  font-weight: 570;
+  letter-spacing: -.4px;
 }
 
 .clock {
-  position: relative;
-  text-align: center;
-  margin-top: 55px;
-  text-shadow: 0 2px 8px #0008;
+  margin-top: 0;
+  font-size: clamp(76px, 21vw, 100px);
+  line-height: 1.12;
+  font-weight: 300;
+  letter-spacing: -5px;
+  font-variant-numeric: tabular-nums;
 }
 
-.date { font-size: 18px; }
-.time { font-size: 68px; font-weight: 300; }
+.searchbar {
+  height: 49px;
+  margin: 26px 27px 0;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 19px;
+  background: rgba(242, 239, 231, .52);
+  border: 1px solid rgba(255,255,255,.15);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  color: white;
+  font-size: 17px;
+  text-shadow: 0 1px 4px #0002;
+}
 
-.search {
-  position: relative;
-  margin: 35px 25px 0;
-  padding: 11px 16px;
-  border-radius: 22px;
-  background: #ffffff38;
-  backdrop-filter: blur(12px);
-  font-size: 14px;
+.search-icon {
+  font-size: 23px;
+  font-weight: 300;
 }
 
 .apps {
-  position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px 8px;
-  padding: 35px 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 6px;
+  row-gap: 25px;
+  padding: 30px 18px 0;
 }
 
 .app {
   border: 0;
-  padding: 0;
-  background: transparent;
+  background: none;
   color: white;
-  font: inherit;
+  min-width: 0;
+  padding: 0;
   text-align: center;
-  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.icon {
-  width: 53px;
-  height: 53px;
-  margin: auto auto 6px;
+.app-icon {
+  width: min(68px, 17vw);
+  height: min(68px, 17vw);
+  max-width: 68px;
+  max-height: 68px;
+  min-width: 54px;
+  min-height: 54px;
+  margin: auto;
+  border-radius: 22%;
   display: grid;
   place-items: center;
-  border-radius: 15px;
-  background: var(--c, #555);
-  font-size: 27px;
-  box-shadow: 0 3px 8px #0002;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 9px rgba(0,0,0,.12);
+  font-size: 35px;
+  line-height: 1;
+  transition: transform .12s;
 }
 
-.name {
-  font-size: 11px;
-  text-shadow: 0 1px 4px #000;
+.app:active .app-icon { transform: scale(.91); }
+
+.app-label {
+  display: block;
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 15px;
+  white-space: nowrap;
+  text-shadow: 0 1px 5px #0008;
 }
+
+.wa { background: #25d366; }
+.ig {
+  background: radial-gradient(circle at 30% 105%,
+  #ffdc80 0%, #fcaf45 18%, #f77737 35%,
+  #e1306c 58%, #c13584 73%, #833ab4 100%);
+}
+.spotify { background: #1ed760; color: #101010; }
+.youtube { background: #ff0033; }
+.notes { background: linear-gradient(#fff,#f0f0f0); color: #efbd36; }
+.xapp { background: #111; }
+.pin { background: #e60023; }
+.sudoku { background: #dfe8fa; color: #4e75c9; }
+.photos { background: #fff; }
+.safari { background: linear-gradient(145deg,#e4f5ff,#7bc5ff); }
+.memo { background: #e9e9ed; color: #888; }
+
+.glyph {
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+}
+.photos .glyph {
+  background: conic-gradient(#ff453a, #ff9f0a, #ffd60a,
+  #30d158, #64d2ff, #0a84ff, #bf5af2, #ff375f);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-size: 43px;
+}
+.ig .glyph { font-size: 37px; }
+.youtube .glyph { font-size: 29px; }
+.wa .glyph { font-size: 35px; }
+.spotify .glyph { font-size: 37px; }
 
 .dock {
   position: absolute;
-  bottom: 18px;
-  left: 15px;
-  right: 15px;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  left: 16px;
+  right: 16px;
+  min-height: 98px;
   padding: 12px 8px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: #ffffff38;
-  backdrop-filter: blur(18px);
-  border-radius: 25px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  border-radius: 29px;
+  background: rgba(238, 231, 218, .57);
+  border: 1px solid rgba(255,255,255,.17);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
 }
 
-.dock .icon { margin-bottom: 0; }
+.dock .app-label { display: none; }
+.dock .app-icon { width: min(61px, 15.5vw); height: min(61px, 15.5vw); }
+
+.home-indicator {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 4px;
+  border-radius: 9px;
+  background: white;
+  box-shadow: 0 1px 3px #0004;
+}
 
 .screen {
   position: absolute;
   inset: 0;
   z-index: 5;
   display: none;
-  background: #f7f7f9;
-  color: #17171b;
   overflow-y: auto;
+  background: #f2f2f7;
+  color: #19191d;
+  overscroll-behavior: contain;
 }
-
 .screen.open { display: block; }
 
-.screen-head {
-  padding: 55px 20px 18px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+.screen-top {
+  padding: 57px 22px 20px;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid #e4e4e9;
 }
-
 .back {
+  padding: 0;
+  margin: 0 0 22px;
   border: 0;
   background: none;
-  color: #087cff;
+  color: var(--blue);
   font-size: 17px;
-  padding: 0;
-  margin-bottom: 22px;
 }
-
-.screen h2 { margin: 0; font-size: 27px; }
-
-.screen-content { padding: 20px; }
-
+.screen h2 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 720;
+  letter-spacing: -.8px;
+}
+.content { padding: 20px 16px 35px; }
 .card {
-  padding: 16px;
-  border-radius: 15px;
   background: white;
+  border-radius: 15px;
+  padding: 17px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 3px #00000008;
 }
-
+.muted { color: #85858b; font-size: 14px; }
+.link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--blue);
+  text-decoration: none;
+}
 .home-button {
   display: block;
-  margin: 20px auto;
-  padding: 10px 18px;
+  margin: 28px auto 0;
   border: 0;
-  border-radius: 20px;
-  background: #e5e5ea;
+  background: #e2e2e8;
+  border-radius: 24px;
+  padding: 10px 22px;
+  color: #333;
+}
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 3px;
+  margin-top: 16px;
+}
+.sudoku-grid button {
+  aspect-ratio: 1;
+  border: 1px solid #c5c5ca;
+  background: white;
+  color: #3977cf;
+  font-size: 23px;
+}
+.sudoku-grid button:nth-child(3n) { border-right: 2px solid #777; }
+.sudoku-grid button:nth-child(3n+1) { border-left: 2px solid #777; }
+
+@media (min-width: 431px) {
+  body { padding: 12px 0; }
+  .phone {
+    height: min(900px, calc(100dvh - 24px));
+    border-radius: 42px;
+    border: 7px solid #19191b;
+  }
+  .home-indicator { bottom: 6px; }
 }
 </style>
 </head>
@@ -167,113 +342,122 @@ body {
 <main class="phone">
   <div class="wallpaper"></div>
 
-  <div class="status">
+  <div class="statusbar">
     <span id="statusTime">9:41</span>
-    <span>● ▰ ▰</span>
+    <div class="status-icons">
+      <span>◆</span><span>◔</span><span>▮▮</span>
+      <span class="battery"></span>
+    </div>
   </div>
 
-  <div class="clock">
+  <section class="clock-area">
     <div class="date" id="date">Wednesday, October 28</div>
-    <div class="time" id="clock">9:41</div>
+    <div class="clock" id="clock">9:41</div>
+  </section>
+
+  <div class="searchbar">
+    <span class="search-icon">⌕</span><span>Search</span>
   </div>
 
-  <div class="search">⌕ &nbsp; Search</div>
-
-  <div class="apps" id="apps"></div>
-  <div class="dock" id="dock"></div>
+  <section class="apps" id="apps"></section>
+  <section class="dock" id="dock"></section>
+  <div class="home-indicator"></div>
 
   <section class="screen" id="screen">
-    <header class="screen-head">
-      <button class="back" onclick="goHome()">‹ Home</button>
+    <header class="screen-top">
+      <button class="back" onclick="goHome()">‹ &nbsp; Home</button>
       <h2 id="appTitle">App</h2>
     </header>
-    <div class="screen-content" id="appContent"></div>
-    <button class="home-button" onclick="goHome()">● Home</button>
+    <div class="content" id="appContent"></div>
   </section>
 </main>
 
 <script>
 const applications = [
-  {name:"WhatsApp", icon:"☎", color:"#25D366",
-   text:"Messages", dock:true},
-  {name:"Instagram", icon:"◎", color:"#D94685",
-   text:"Mavin's Photos"},
-  {name:"Spotify", icon:"♫", color:"#1DB954",
-   text:"Mavin's Playlist"},
-  {name:"YouTube", icon:"▶", color:"#FF3030",
-   text:"aespa — Lemonade"},
-  {name:"Notes", icon:"▤", color:"#F6C84C",
-   text:"Mavin's Thoughts"},
-  {name:"X", icon:"𝕏", color:"#222",
-   text:"Private account"},
-  {name:"Pinterest", icon:"P", color:"#BD081C",
-   text:"Random Thing About Mavin"},
-  {name:"Sudoku", icon:"▦", color:"#5976D9",
-   text:"Sudoku game"},
-  {name:"Photos", icon:"🌈", color:"#fff",
-   text:"Mavin's Camera Roll", dock:true},
-  {name:"Safari", icon:"🧭", color:"#DCEEFF",
-   text:"Web browser", dock:true},
-  {name:"Memo", icon:"✎", color:"#E9E9EB",
-   text:"Quick notes", dock:true}
+  {name:"Instagram", glyph:"◎", cls:"ig", desc:"Mavin's Photos"},
+  {name:"Spotify", glyph:"♫", cls:"spotify", desc:"Mavin's Playlist"},
+  {name:"YouTube", glyph:"▶", cls:"youtube", desc:"aespa — Lemonade"},
+  {name:"Notes", glyph:"▤", cls:"notes", desc:"Mavin's Thoughts"},
+  {name:"X", glyph:"𝕏", cls:"xapp", desc:"Mavin's private account"},
+  {name:"Pinterest", glyph:"P", cls:"pin", desc:"Random Thing About Mavin"},
+  {name:"Sudoku", glyph:"▦", cls:"sudoku", desc:"Sudoku demo"},
+  {name:"Photos", glyph:"🌈", cls:"photos", desc:"Mavin's Camera Roll", dock:true},
+  {name:"WhatsApp", glyph:"☎", cls:"wa", desc:"Mavin's Messages", dock:true},
+  {name:"Safari", glyph:"🧭", cls:"safari", desc:"Web browser", dock:true},
+  {name:"Memo", glyph:"✎", cls:"memo", desc:"Quick notes", dock:true}
 ];
 
 function makeApp(app) {
   const button = document.createElement("button");
   button.className = "app";
-  button.innerHTML =
-    `<div class="icon" style="--c:${app.color}">${app.icon}</div>
-     <div class="name">${app.name}</div>`;
-  button.onclick = () => openApp(app);
+  button.setAttribute("aria-label", app.name);
+  button.innerHTML = `<div class="app-icon ${app.cls}">
+    <span class="glyph">${app.glyph}</span>
+    </div><span class="app-label">${app.name}</span>`;
+  button.addEventListener("click", () => openApp(app));
   return button;
 }
 
 applications.forEach(app => {
-  (app.dock ? document.getElementById("dock") :
-    document.getElementById("apps")).appendChild(makeApp(app));
+  document.getElementById(app.dock ? "dock" : "apps")
+    .appendChild(makeApp(app));
 });
 
 function openApp(app) {
-  document.getElementById("appTitle").textContent = app.name;
+  const screen = document.getElementById("screen");
+  const title = document.getElementById("appTitle");
   const content = document.getElementById("appContent");
+  title.textContent = app.name;
   content.replaceChildren();
 
   const card = document.createElement("div");
   card.className = "card";
-  card.textContent = app.text;
+  const heading = document.createElement("strong");
+  heading.textContent = app.desc;
+  card.appendChild(heading);
   content.appendChild(card);
 
-  const info = document.createElement("p");
-  info.textContent = "Mavin's iPhone";
-  content.appendChild(info);
+  const note = document.createElement("p");
+  note.className = "muted";
+  note.textContent = "Mavin's iPhone";
+  content.appendChild(note);
 
   if (app.name === "Sudoku") {
     const grid = document.createElement("div");
-    grid.style.cssText =
-      "display:grid;grid-template-columns:repeat(3,1fr);gap:4px";
+    grid.className = "sudoku-grid";
     for (let i = 0; i < 9; i++) {
       const cell = document.createElement("button");
       cell.textContent = i + 1;
-      cell.style.cssText =
-        "height:60px;font-size:22px;border:1px solid #aaa;background:white";
       cell.onclick = () => {
         cell.textContent = cell.textContent === "·" ? i + 1 : "·";
       };
       grid.appendChild(cell);
     }
     content.appendChild(grid);
-    info.textContent = "Demo grid — tap a cell to change it.";
+    note.textContent = "Demo grid — tap a cell to change it.";
   }
 
   if (app.name === "YouTube") {
     const link = document.createElement("a");
+    link.className = "link";
     link.href = "https://www.youtube.com/results?search_query=aespa+Lemonade";
     link.target = "_blank";
+    link.rel = "noopener";
     link.textContent = "Search aespa — Lemonade on YouTube ↗";
     content.appendChild(link);
   }
 
-  document.getElementById("screen").classList.add("open");
+  if (app.name === "Spotify") {
+    const link = document.createElement("a");
+    link.className = "link";
+    link.href = "https://open.spotify.com/";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Open Spotify ↗";
+    content.appendChild(link);
+  }
+
+  screen.classList.add("open");
 }
 
 function goHome() {
@@ -282,14 +466,15 @@ function goHome() {
 
 function updateClock() {
   const now = new Date();
-  document.getElementById("clock").textContent =
-    now.toLocaleTimeString("en-US",
-      {hour:"numeric",minute:"2-digit",hour12:false});
-  document.getElementById("statusTime").textContent =
-    document.getElementById("clock").textContent;
+  const time = now.toLocaleTimeString("en-US", {
+    hour:"2-digit", minute:"2-digit", hour12:false
+  });
+  document.getElementById("clock").textContent = time;
+  document.getElementById("statusTime").textContent = time;
   document.getElementById("date").textContent =
-    now.toLocaleDateString("en-US",
-      {weekday:"long",month:"long",day:"numeric"});
+    now.toLocaleDateString("en-US", {
+      weekday:"long", month:"long", day:"numeric"
+    });
 }
 updateClock();
 setInterval(updateClock, 30000);
