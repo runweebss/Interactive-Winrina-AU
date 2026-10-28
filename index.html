@@ -1,731 +1,482 @@
-
+```html
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Mavin's iPhone</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mavin's iPhone - iOS 17 Simulation</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-:root {
-  --white: #fff;
-  --glass: rgba(225, 225, 225, .30);
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "Helvetica Neue", Inter, sans-serif;
-  background: #111;
-  color: white;
-}
-
-.phone {
-  width: 100%;
-  max-width: 430px;
-  height: 100dvh;
-  min-height: 680px;
-  margin: auto;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background: #537eb8 url("camera-wallpaper.jpg") center center / cover no-repeat;
-}
-
-.phone::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 30, 60, .13),
-    transparent 42%,
-    rgba(0, 0, 0, .14)
-  );
-}
-
-/* STATUS BAR */
-.statusbar {
-  height: 58px;
-  padding: 13px 27px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.status-icons svg {
-  width: 21px;
-  height: 20px;
-  fill: white;
-}
-
-/* DYNAMIC ISLAND */
-.island-row {
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 29px;
-}
-
-.island-time {
-  font-size: 19px;
-  font-weight: 700;
-}
-
-.island {
-  width: 144px;
-  height: 43px;
-  border-radius: 30px;
-  background: #000;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.island-icons {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.island-icons svg {
-  width: 21px;
-  height: 20px;
-  stroke: white;
-  fill: none;
-  stroke-width: 2.5;
-}
-
-/* WIDGETS */
-.widgets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 13px;
-  padding: 15px 18px 0;
-}
-
-.widget {
-  height: 178px;
-  min-width: 0;
-  border-radius: 27px;
-  padding: 19px 17px;
-  background: rgba(39, 53, 76, .76);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  overflow: hidden;
-}
-
-.day {
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: #ff6868;
-  margin-bottom: 3px;
-}
-
-.date-number {
-  font-size: 67px;
-  line-height: 1.08;
-  font-weight: 300;
-  letter-spacing: -3px;
-}
-
-.month {
-  margin-top: 10px;
-  font-size: 15px;
-  white-space: nowrap;
-}
-
-.weather-city {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.3;
-  min-height: 42px;
-}
-
-.temperature {
-  font-size: 54px;
-  line-height: 1.15;
-  font-weight: 300;
-  letter-spacing: -2px;
-  margin-top: 2px;
-}
-
-.weather-bottom {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin-top: 9px;
-  font-size: 14px;
-}
-
-.weather-bottom svg {
-  width: 23px;
-  height: 23px;
-  stroke: white;
-  fill: none;
-  stroke-width: 1.7;
-}
-
-/* APP GRID */
-.apps {
-  position: absolute;
-  top: 53.1%;
-  left: 0;
-  right: 0;
-  padding: 0 23px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 12px;
-  row-gap: 22px;
-}
-
-.app {
-  min-width: 0;
-  text-align: center;
-  color: white;
-  border: 0;
-  padding: 0;
-  background: none;
-  font: inherit;
-  cursor: pointer;
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
-}
-
-.app-icon {
-  width: min(100%, 70px);
-  aspect-ratio: 1;
-  margin: 0 auto 7px;
-  border-radius: 21%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 3px 8px rgba(0,0,0,.19);
-  background: white;
-  text-shadow: none;
-}
-
-.app-icon svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.app-label {
-  display: block;
-  font-size: 12px;
-  line-height: 1.25;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* DOCK */
-.dock {
-  position: absolute;
-  left: 15px;
-  right: 15px;
-  bottom: 91px;
-  height: 91px;
-  border-radius: 29px;
-  padding: 10px 13px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  gap: 10px;
-  background: rgba(220, 220, 220, .37);
-  border: 1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(25px) saturate(150%);
-  -webkit-backdrop-filter: blur(25px) saturate(150%);
-}
-
-.dock .app-icon {
-  width: 100%;
-  max-width: 68px;
-  margin: auto;
-  border-radius: 22%;
-}
-
-.dock .app-label {
-  display: none;
-}
-
-.badge {
-  position: absolute;
-  top: -5px;
-  right: -4px;
-  background: #ff3b30;
-  color: white;
-  border: 2px solid white;
-  border-radius: 20px;
-  min-width: 27px;
-  height: 27px;
-  padding: 0 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  text-shadow: none;
-}
-
-/* BOTTOM BROWSER BAR */
-.browser-bar {
-  position: absolute;
-  bottom: 17px;
-  left: 28px;
-  right: 28px;
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.browser-button {
-  height: 46px;
-  width: 46px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(220,220,220,.42);
-  border: 1px solid rgba(255,255,255,.3);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  color: white;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.address-bar {
-  height: 46px;
-  flex: 1;
-  min-width: 0;
-  border-radius: 25px;
-  background: rgba(220,220,220,.45);
-  border: 1px solid rgba(255,255,255,.3);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 7px;
-  padding: 0 10px;
-  font-size: 12px;
-  font-weight: 600;
-  overflow: hidden;
-}
-
-.address-bar span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.address-bar svg,
-.browser-button svg {
-  width: 23px;
-  height: 23px;
-  fill: none;
-  stroke: white;
-  stroke-width: 2.5;
-  flex-shrink: 0;
-}
-
-/* APP SCREEN */
-.app-screen {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  display: none;
-  background: #f7f7f9;
-  color: #171717;
-  padding: 65px 22px 30px;
-}
-
-.app-screen.open {
-  display: block;
-}
-
-.app-screen h2 {
-  font-size: 28px;
-  margin-top: 35px;
-}
-
-.app-screen p {
-  color: #666;
-  line-height: 1.6;
-}
-
-.back-button {
-  border: 0;
-  border-radius: 18px;
-  background: #e5e5ea;
-  padding: 10px 16px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-@media (max-height: 740px) {
-  .widgets { padding-top: 8px; }
-  .widget { height: 150px; padding: 14px; }
-  .date-number { font-size: 57px; }
-  .apps { top: 48%; row-gap: 13px; }
-  .dock { bottom: 75px; height: 78px; }
-  .browser-bar { bottom: 9px; }
-}
-
-@media (min-width: 500px) {
-  .phone {
-    height: 900px;
-    margin: 20px auto;
-    border-radius: 35px;
-    border: 5px solid #292929;
+  :root {
+    --ios-font: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
   }
-}
+
+  * {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #0f172a;
+    font-family: var(--ios-font);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  /* 9:16 Responsive iPhone 15 Pro Hardware Outer Frame */
+  .iphone-wrapper {
+    position: relative;
+    padding: 12px;
+  }
+
+  /* Outer Phone Body Buttons */
+  .side-btn-mute {
+    position: absolute;
+    left: 2px;
+    top: 115px;
+    width: 4px;
+    height: 28px;
+    background: #334155;
+    border-radius: 2px 0 0 2px;
+  }
+  .side-btn-volup {
+    position: absolute;
+    left: 2px;
+    top: 160px;
+    width: 4px;
+    height: 52px;
+    background: #334155;
+    border-radius: 2px 0 0 2px;
+  }
+  .side-btn-voldn {
+    position: absolute;
+    left: 2px;
+    top: 225px;
+    width: 4px;
+    height: 52px;
+    background: #334155;
+    border-radius: 2px 0 0 2px;
+  }
+  .side-btn-power {
+    position: absolute;
+    right: 2px;
+    top: 180px;
+    width: 4px;
+    height: 75px;
+    background: #334155;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .iphone-frame {
+    position: relative;
+    width: 380px;
+    height: 800px;
+    background: #000000;
+    border-radius: 54px;
+    box-shadow: 0 25px 70px -10px rgba(0, 0, 0, 0.85),
+                0 0 0 10px #1e293b,
+                0 0 0 12px #334155,
+                0 0 40px rgba(59, 130, 246, 0.2);
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Wallpapers */
+  .wallpaper-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease-in-out;
+  }
+  .wp-default {
+    background: radial-gradient(circle at 20% 20%, #ff5252 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, #7c3aed 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, #2563eb 0%, #0f172a 100%);
+  }
+  .wp-dark {
+    background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #020617 100%);
+  }
+  .wp-nature {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80');
+    background-size: cover;
+  }
+
+  /* Dynamic Island */
+  .dynamic-island-container {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+  }
+  .dynamic-island {
+    width: 120px;
+    height: 35px;
+    background: #000000;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+  .dynamic-island.expanded {
+    width: 320px;
+    height: 80px;
+    border-radius: 38px;
+    padding: 12px 18px;
+  }
+
+  /* Status Bar */
+  .statusbar {
+    height: 48px;
+    padding: 12px 26px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    z-index: 100;
+    color: #ffffff;
+  }
+
+  /* iOS Squircle Apps Grid */
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 14px;
+    padding: 10px 22px 0;
+    z-index: 10;
+  }
+
+  .app-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.12s ease;
+  }
+  .app-btn:active {
+    transform: scale(0.86);
+  }
+
+  .app-icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 22%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .app-label {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.2px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    white-space: nowrap;
+  }
+
+  /* Bottom Dock */
+  .dock-wrapper {
+    margin-top: auto;
+    margin-bottom: 22px;
+    padding: 0 16px;
+    z-index: 10;
+  }
+  .dock {
+    height: 90px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+  }
+
+  /* Home Indicator */
+  .home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 135px;
+    height: 5px;
+    background: #ffffff;
+    border-radius: 10px;
+    z-index: 300;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* Full Screen iOS App Pages */
+  .app-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 150;
+    background: #f2f2f7;
+    color: #1c1c1e;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+    overflow: hidden;
+  }
+  .app-screen.active {
+    transform: translateY(0);
+  }
+
+  .app-header {
+    height: 88px;
+    padding-top: 42px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(249, 249, 249, 0.94);
+    backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(0,0,0,0.15);
+    z-index: 10;
+  }
+
+  .app-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    position: relative;
+  }
+
+  /* iOS Widgets */
+  .ios-widget {
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(25px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 16px;
+    margin: 8px 22px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    z-index: 10;
+  }
+
+  /* Playable Sudoku Styling */
+  .sudoku-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+  }
+  .sudoku-cell.selected {
+    background: #bfdbfe !important;
+    color: #1d4ed8;
+  }
+  .sudoku-cell.fixed {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  /* Search Spotlight Bar */
+  .spotlight-bar {
+    margin: 12px 22px 0;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    z-index: 10;
+  }
+
+  /* Dark theme overrides inside apps */
+  .dark-app {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+  .dark-app .app-header {
+    background: rgba(28, 28, 30, 0.92) !important;
+    border-bottom: 0.5px solid rgba(255,255,255,0.15) !important;
+  }
 </style>
 </head>
-
 <body>
-<div class="phone">
 
-  <div class="statusbar">
-    <span id="statusTime">07:33</span>
-    <div class="status-icons">
-      <svg viewBox="0 0 24 24" aria-label="Sinyal">
-        <rect x="2" y="15" width="4" height="6" rx="1"/>
-        <rect x="8" y="11" width="4" height="10" rx="1"/>
-        <rect x="14" y="7" width="4" height="14" rx="1"/>
-        <rect x="20" y="3" width="3" height="18" rx="1"/>
-      </svg>
-      <svg viewBox="0 0 24 24" aria-label="Wi-Fi">
-        <path d="M2 8.5C7.8 3.5 16.2 3.5 22 8.5L19 12C15 8.7 9 8.7 5 12Z"/>
-        <path d="M6 14.5C9.5 11.7 14.5 11.7 18 14.5L15 18C13.3 16.7 10.7 16.7 9 18Z"/>
-        <circle cx="12" cy="21" r="1.5"/>
-      </svg>
-      <svg viewBox="0 0 28 16" aria-label="Baterai">
-        <rect x="1" y="2" width="23" height="12" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
-        <rect x="3" y="4" width="19" height="8" rx="1.5"/>
-        <rect x="25" y="5" width="2" height="6" rx="1"/>
-      </svg>
-    </div>
-  </div>
+<div class="iphone-wrapper">
+  <!-- Outer Physical Buttons -->
+  <div class="side-btn-mute"></div>
+  <div class="side-btn-volup"></div>
+  <div class="side-btn-voldn"></div>
+  <div class="side-btn-power"></div>
 
-  <div class="island-row">
-    <span class="island-time" id="islandTime">07:33</span>
-    <div class="island"></div>
-    <div class="island-icons">
-      <svg viewBox="0 0 24 24">
-        <path d="M3 20V15M8 20V11M13 20V7M18 20V3"/>
-      </svg>
-      <svg viewBox="0 0 24 24">
-        <path d="M2 8C7.5 3 16.5 3 22 8M5 12C9 8.5 15 8.5 19 12M8.5 16C10.5 14.5 13.5 14.5 15.5 16"/>
-        <circle cx="12" cy="20" r="1" fill="white"/>
-      </svg>
-      <svg viewBox="0 0 30 18">
-        <rect x="1" y="2" width="25" height="14" rx="3"/>
-        <rect x="27" y="6" width="2" height="6" rx="1"/>
-      </svg>
-    </div>
-  </div>
+  <!-- Screen Frame -->
+  <div class="iphone-frame" id="iphoneFrame">
+    
+    <!-- Wallpaper -->
+    <div class="wallpaper-bg wp-default" id="wallpaperBg"></div>
 
-  <div class="widgets">
-    <div class="widget">
-      <div class="day" id="dayName">RABU</div>
-      <div class="date-number" id="dateNumber">28</div>
-      <div class="month" id="monthName">Oktober 2026</div>
-    </div>
-
-    <div class="widget">
-      <div class="weather-city">Seoul, Korea<br>Selatan</div>
-      <div class="temperature">4°</div>
-      <div class="weather-bottom">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 1V4M12 20V23M1 12H4M20 12H23M4.2 4.2L6.3 6.3M17.7 17.7L19.8 19.8M19.8 4.2L17.7 6.3M6.3 17.7L4.2 19.8"/>
-        </svg>
-        <span>Cerah</span>
+    <!-- Dynamic Island -->
+    <div class="dynamic-island-container">
+      <div class="dynamic-island" id="dynamicIsland" onclick="toggleIsland()">
+        <div id="islandContentLeft" class="hidden items-center gap-2 text-[11px] font-semibold text-white">
+          <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+          <span id="islandSongTitle">Lemonade</span>
+        </div>
+        <div class="w-3 h-3 bg-black/80 rounded-full border border-white/10 ml-auto mr-1"></div>
+        <div id="islandContentRight" class="hidden text-[11px] text-white/70">aespa</div>
       </div>
     </div>
-  </div>
 
-  <div class="apps" id="appsGrid"></div>
-  <div class="dock" id="dock"></div>
-
-  <div class="browser-bar">
-    <button class="browser-button" onclick="history.back()" aria-label="Kembali">‹</button>
-
-    <div class="address-bar">
-      <svg viewBox="0 0 24 24">
-        <path d="M4 6H20M4 12H20M4 18H20"/>
-      </svg>
-      <span>mavines.vercel.app</span>
-      <svg viewBox="0 0 24 24">
-        <path d="M20 11A8 8 0 1 1 17 5"/>
-        <path d="M17 2V6H21"/>
-      </svg>
+    <!-- Live Status Bar -->
+    <div class="statusbar">
+      <span id="statusClock">09:41</span>
+      <div class="flex items-center gap-1.5 text-xs">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.2c-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.02-.39 1.41 0l.71.71c2.19-1.74 5.07-2.3 7.74-1.52l1.64-1.64c-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.02-.39 1.41 0l1.24 1.24C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+        <span class="text-[10px] font-bold tracking-tight">5G</span>
+        <div class="w-5 h-2.5 border border-white rounded-[3px] p-[1px] relative flex items-center">
+          <div class="h-full w-[80%] bg-white rounded-[1px]"></div>
+          <div class="absolute -right-[3px] top-[2px] w-[2px] h-[3px] bg-white rounded-r-[1px]"></div>
+        </div>
+      </div>
     </div>
 
-    <button class="browser-button" onclick="alert('Simulasi tab Safari 📱')" aria-label="Tab">▢</button>
-  </div>
+    <!-- Clock & Date Lockscreen Display -->
+    <div class="text-center pt-3 pb-1 z-10">
+      <div id="dateText" class="text-xs font-semibold tracking-wide text-white/90 uppercase">Wednesday, October 28</div>
+      <div id="bigClockText" class="text-5xl font-light tracking-tight text-white mt-0.5">09:41</div>
+    </div>
 
-  <div class="app-screen" id="appScreen">
-    <button class="back-button" onclick="closeApp()">‹ Kembali</button>
-    <h2 id="screenTitle">Aplikasi</h2>
-    <p id="screenText">Ini adalah simulasi tampilan aplikasi.</p>
-  </div>
+    <!-- Weather Home Widget -->
+    <div class="ios-widget text-white flex justify-between items-center cursor-pointer" onclick="openApp('Weather')">
+      <div>
+        <div class="text-xs font-semibold text-white/80">Jakarta</div>
+        <div class="text-2xl font-bold">29°C</div>
+        <div class="text-[11px] text-white/80">Partly Cloudy · H:32° L:25°</div>
+      </div>
+      <div class="text-3xl animate-bounce">⛅</div>
+    </div>
 
+    <!-- Spotlight Search -->
+    <div class="spotlight-bar">
+      <svg class="w-4 h-4 fill-white/80" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <span>Search</span>
+    </div>
+
+    <!-- Main Apps Grid -->
+    <div class="apps-grid" id="mainAppsGrid"></div>
+
+    <!-- Dock Apps Grid -->
+    <div class="dock-wrapper">
+      <div class="dock" id="dockAppsGrid"></div>
+    </div>
+
+    <!-- Home Indicator Bar -->
+    <div class="home-indicator" onclick="closeApp()"></div>
+
+    <!-- Fullscreen App Modal Container -->
+    <div class="app-screen" id="appScreen">
+      <div class="app-header">
+        <button onclick="closeApp()" class="flex items-center text-blue-500 font-medium text-sm">
+          <svg class="w-5 h-5 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          Home
+        </button>
+        <h1 id="screenTitle" class="font-semibold text-base">App</h1>
+        <div class="w-10"></div>
+      </div>
+      <div class="app-body" id="screenBody"></div>
+    </div>
+
+  </div>
 </div>
 
 <script>
-const icons = {
-  notes: `<svg viewBox="0 0 100 100">
-    <defs>
-      <linearGradient id="noteBg" x1="0" y1="0" x2="0" y2="1">
-        <stop stop-color="#fff" offset=".15"/>
-        <stop stop-color="#f4f4f4" offset="1"/>
-      </linearGradient>
-    </defs>
-    <rect width="100" height="100" rx="22" fill="url(#noteBg)"/>
-    <path d="M0 20H100V27H0Z" fill="#ffcf26"/>
-    <path d="M12 45H88M12 61H88M12 77H88" stroke="#d3d3d3" stroke-width="2"/>
-    <path d="M0 27H100" stroke="#e9e9e9" stroke-dasharray="2 3"/>
-  </svg>`,
-
-  photos: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#fff"/>
-    <g transform="translate(50 50)">
-      <ellipse cy="-18" rx="13" ry="23" fill="#ff453a"/>
-      <ellipse cx="13" cy="-13" rx="13" ry="23" transform="rotate(45 13 -13)" fill="#ff9500"/>
-      <ellipse cx="18" cy="0" rx="13" ry="23" transform="rotate(90 18 0)" fill="#ffcc00"/>
-      <ellipse cx="13" cy="13" rx="13" ry="23" transform="rotate(135 13 13)" fill="#34c759"/>
-      <ellipse cy="18" rx="13" ry="23" fill="#32ade6"/>
-      <ellipse cx="-13" cy="13" rx="13" ry="23" transform="rotate(45 -13 13)" fill="#5856d6"/>
-      <ellipse cx="-18" rx="13" ry="23" transform="rotate(90 -18 0)" fill="#af52de"/>
-      <ellipse cx="-13" cy="-13" rx="13" ry="23" transform="rotate(135 -13 -13)" fill="#ff2d55"/>
-      <circle r="10" fill="#fff" opacity=".6"/>
-    </g>
-  </svg>`,
-
-  settings: `<svg viewBox="0 0 100 100">
-    <defs>
-      <linearGradient id="gearBg" x1="0" y1="0" x2="1" y2="1">
-        <stop stop-color="#fafafa"/><stop offset="1" stop-color="#8c9298"/>
-      </linearGradient>
-    </defs>
-    <rect width="100" height="100" rx="22" fill="url(#gearBg)"/>
-    <g transform="translate(50 50)" stroke="#3e4347" stroke-width="4">
-      <circle r="31" fill="#b7bdc0"/>
-      <circle r="24" fill="#e5e7e7"/>
-      <circle r="17" fill="#8c9397"/>
-      <circle r="9" fill="#dfe2e3"/>
-      ${Array.from({length:12},(_,i)=>`<rect x="-4" y="-37" width="8" height="13" rx="2" transform="rotate(${i*30})" fill="#777f83"/>`).join("")}
-      <circle r="4" fill="#62686b"/>
-    </g>
-  </svg>`,
-
-  naver: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#03c75a"/>
-    <path d="M25 20H43L60 48V20H77V80H59L42 52V80H25Z" fill="white"/>
-  </svg>`,
-
-  youtube: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#fff"/>
-    <rect x="15" y="29" width="70" height="42" rx="13" fill="#ff0033"/>
-    <path d="M44 39L44 61L63 50Z" fill="white"/>
-  </svg>`,
-
-  instagram: `<svg viewBox="0 0 100 100">
-    <defs>
-      <radialGradient id="ig" cx="25%" cy="100%" r="120%">
-        <stop stop-color="#ffd776"/><stop offset=".32" stop-color="#ff4d67"/>
-        <stop offset=".65" stop-color="#c135ad"/><stop offset="1" stop-color="#5851db"/>
-      </radialGradient>
-    </defs>
-    <rect width="100" height="100" rx="23" fill="url(#ig)"/>
-    <rect x="20" y="20" width="60" height="60" rx="18" fill="none" stroke="white" stroke-width="7"/>
-    <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="7"/>
-    <circle cx="70" cy="30" r="4.5" fill="white"/>
-  </svg>`,
-
-  x: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#fff"/>
-    <path d="M24 20H39L76 80H61Z" fill="#000"/>
-    <path d="M75 20L25 80H35L84 20Z" fill="#000"/>
-    <path d="M24 20H39L76 80H61Z M75 20L25 80H35L84 20Z" fill="none" stroke="#000" stroke-width="1"/>
-  </svg>`,
-
-  safari: `<svg viewBox="0 0 100 100">
-    <defs><linearGradient id="saf" x2="0" y2="1">
-      <stop stop-color="#4ee6ff"/><stop offset="1" stop-color="#007aff"/>
-    </linearGradient></defs>
-    <rect width="100" height="100" rx="22" fill="white"/>
-    <circle cx="50" cy="50" r="43" fill="url(#saf)"/>
-    <circle cx="50" cy="50" r="37" fill="none" stroke="#c8f7ff" stroke-width="1.5"/>
-    ${Array.from({length:24},(_,i)=>`<path d="M50 8V13" transform="rotate(${i*15} 50 50)" stroke="#e4fcff" stroke-width="2"/>`).join("")}
-    <path d="M64 28L54 54L35 71L45 45Z" fill="#fff"/>
-    <path d="M64 28L54 54L45 45Z" fill="#ff453a"/>
-    <path d="M35 71L45 45L54 54Z" fill="#ff453a"/>
-  </svg>`,
-
-  camera: `<svg viewBox="0 0 100 100">
-    <defs><linearGradient id="cam" x2="0" y2="1">
-      <stop stop-color="#f7f7f7"/><stop offset="1" stop-color="#aeb1b7"/>
-    </linearGradient></defs>
-    <rect width="100" height="100" rx="22" fill="url(#cam)"/>
-    <path d="M17 35H31L37 28H58L64 35H80Q85 35 85 41V70Q85 76 79 76H20Q15 76 15 70V41Q15 35 17 35Z" fill="#17191c"/>
-    <circle cx="50" cy="53" r="17" fill="#a6a9ad"/>
-    <circle cx="50" cy="53" r="13" fill="#25282d"/>
-    <circle cx="50" cy="53" r="9" fill="#111"/>
-    <circle cx="73" cy="42" r="3" fill="#ffcc00"/>
-  </svg>`,
-
-  line: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#06c755"/>
-    <path d="M50 20C28 20 12 33 12 50C12 64 24 75 40 78L36 89L53 78C74 77 88 65 88 49C88 33 71 20 50 20Z" fill="white"/>
-    <text x="50" y="57" text-anchor="middle" font-size="22" font-weight="800" fill="#06c755">LINE</text>
-  </svg>`,
-
-  music: `<svg viewBox="0 0 100 100">
-    <defs><linearGradient id="musicBg" x2="0" y2="1">
-      <stop stop-color="#ff5279"/><stop offset="1" stop-color="#f50045"/>
-    </linearGradient></defs>
-    <rect width="100" height="100" rx="22" fill="url(#musicBg)"/>
-    <path d="M62 20V64C62 72 52 77 45 73C36 69 41 58 52 58C55 58 57 59 59 60V35L77 30V22Z" fill="white"/>
-  </svg>`,
-
-  garden: `<svg viewBox="0 0 100 100">
-    <rect width="100" height="100" rx="22" fill="#3dba3c"/>
-    <path d="M0 70L40 30L100 55V100H0Z" fill="#67d24a"/>
-    <path d="M10 28L86 42L80 50L14 38Z" fill="#f6d34a"/>
-    <circle cx="25" cy="60" r="7" fill="#f1c5a4"/>
-    <path d="M20 68L30 68L34 85H16Z" fill="#2878dc"/>
-    <circle cx="72" cy="27" r="7" fill="#efbd94"/>
-    <path d="M65 35H79L83 53H62Z" fill="#ec4c5d"/>
-    <path d="M66 53L57 72M77 53L88 70" stroke="#f0c3a0" stroke-width="5" stroke-linecap="round"/>
-  </svg>`
-};
-
-const apps = [
-  {name:"Catatan", icon:"notes"},
-  {name:"Galeri", icon:"photos"},
-  {name:"Pengaturan", icon:"settings"},
-  {name:"Gardenscapes", icon:"garden"},
-  {name:"Naver", icon:"naver", url:"https://www.naver.com"},
-  {name:"YouTube", icon:"youtube", url:"https://www.youtube.com"},
-  {name:"Instagram", icon:"instagram", url:"https://www.instagram.com"},
-  {name:"X", icon:"x", url:"https://x.com"}
-];
-
-const dockApps = [
-  {name:"Safari", icon:"safari", url:"https://www.google.com"},
-  {name:"Kamera", icon:"camera"},
-  {name:"LINE", icon:"line", badge:"19", url:"https://line.me"},
-  {name:"Musik", icon:"music"}
-];
-
-function createApp(app, inDock=false) {
-  const button = document.createElement("button");
-  button.className = "app";
-  button.setAttribute("aria-label", app.name);
-
-  const iconBox = document.createElement("div");
-  iconBox.className = "app-icon";
-  iconBox.innerHTML = icons[app.icon];
-
-  if (app.badge) {
-    iconBox.style.position = "relative";
-    const badge = document.createElement("span");
-    badge.className = "badge";
-    badge.textContent = app.badge;
-    iconBox.appendChild(badge);
-  }
-
-  const label = document.createElement("span");
-  label.className = "app-label";
-  label.textContent = app.name;
-
-  button.append(iconBox, label);
-  button.addEventListener("click", () => {
-    if (app.url) {
-      window.open(app.url, "_blank", "noopener,noreferrer");
-    } else {
-      openApp(app.name);
-    }
-  });
-
-  return button;
-}
-
-const grid = document.getElementById("appsGrid");
-apps.forEach(app => grid.appendChild(createApp(app)));
-
-const dock = document.getElementById("dock");
-dockApps.forEach(app => dock.appendChild(createApp(app, true)));
-
-function openApp(name) {
-  document.getElementById("screenTitle").textContent = name;
-  const descriptions = {
-    "Catatan": "Tulis ide, daftar belanja, atau catatan harianmu di sini. ✍️",
-    "Kamera": "Kamera ini hanya simulasi tampilan.",
-    "Musik": "Perpustakaan musik kamu akan muncul di sini. 🎵",
-    "Gardenscapes": "Selamat datang di kebunmu! 🌿"
-  };
-  document.getElementById("screenText").textContent =
-    descriptions[name] || "Ini adalah simulasi tampilan aplikasi.";
-  document.getElementById("appScreen").classList.add("open");
-}
-
-function closeApp() {
-  document.getElementById("appScreen").classList.remove("open");
-}
-
-/* Tanggal otomatis mengikuti perangkat */
-const now = new Date();
-const weekdays = ["MINGGU","SENIN","SELASA","RABU","KAMIS","JUMAT","SABTU"];
-const months = ["Januari","Februari","Maret","April","Mei","Juni",
-                "Juli","Agustus","September","Oktober","November","Desember"];
-
-document.getElementById("dayName").textContent = weekdays[now.getDay()];
-document.getElementById("dateNumber").textContent = now.getDate();
-document.getElementById("monthName").textContent =
-  months[now.getMonth()] + " " + now.getFullYear();
-
+// Live Real-Time Clock
 function updateClock() {
-  const d = new Date();
-  const time = d.toLocaleTimeString("id-ID", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false
-  }).replace(".", ":");
-  document.getElementById("statusTime").textContent = time;
-  document.getElementById("islandTime").textContent = time;
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  
+  document.getElementById('statusClock').textContent = `${hours}:${minutes}`;
+  document.getElementById('bigClockText').textContent = `${hours}:${minutes}`;
+
+  const options = { weekday: 'long', month: 'long', day: 'numeric' };
+  document.getElementById('dateText').textContent = now.toLocaleDateString('en-US', options);
 }
+setInterval(updateClock, 1000);
 updateClock();
-setInterval(updateClock, 30000);
-</script>
-</body>
-</html>
+
+// Dynamic Island Interactive Toggle
+let islandExpanded = false;
+function toggleIsland(forceState = null) {
+  const island = document.getElementById('dynamicIsland');
+  const left = document.getElementById('islandContentLeft');
+  const right = document.getElementById('islandContentRight');
+  
+  islandExpanded = forceState !== null ? forceState : !islandExpanded;
+  if (islandExpanded) {
+    island.classList.add('expanded');
+    left.classList.remove('hidden');
+    left.classList.add('flex');
+    right.classList.remove('hidden');
+  } else {
+    island.classList.remove('expanded');
+    left.classList.add('hidden');
+    left.classList.remove('flex');
+    right.classList.add('hidden');
+  }
+}
+
+// iOS App Database & High-Quality Clean SVG Assets
+const appsList = [
+  { name: 'Instagram', bg: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)', svg: `<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>` },
+  { name: 'Spotify', bg: '#1ed760', svg: `<svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.377 0 12s5.376 12 12 12 12-5.377 12-12S18.624 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.72 1.62.539.3 1.02.18 1.02.72.18.54-.18 1.14-.72 1.32z"/></svg>` },
+  { name: 'YouTube', bg: '#ff0000', svg: `<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>` },
+  { name: 'Notes', bg: '#ffffff', svg: `<svg class="w-8 h-8 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>` },
+  { name: 'X', bg: '#000000', svg: `<svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>` },
+  { name: 'Pinterest', bg: '#e60023', svg: `<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.02 0 1.513.769 1.513 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.594 0 12.017 0z"/></svg>` },
+  { name: 'Sudoku', bg: '#3b82f6', svg: `<svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16M6 4v16M12 4v16M18 4v16"/></svg>` },
+  { name: 'Settings', bg: '#8e8e93', svg: `<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>` },
+  { name: 'Photos', dock: true, bg: '#ffffff', svg: `<svg class="w-8 h-8" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3" fill="#ff2d55"/><circle cx="17" cy="12" r="3" fill="#ff9500"/><circle cx="12" cy="17" r="3" fill="#4cd964"/><circle cx="7" cy="12" r="3" fill="#5ac8fa"/></svg>` },
+  { name: 'WhatsApp', dock: true, bg: '#25d366', svg: `<svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>` },
+  { name: 'Safari', dock: true, bg: 'linear-gradient(135deg, #a5f3fc, #0284c7)', svg: `<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 15l3-6-6 3 3 3z"/></svg>` },
+  { name: 'Weather', dock: true, bg: 'linear-gradient(to bottom, #3b82f6, #1d4ed8)', svg: `<svg class="w-8 h-8 text-yellow-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2.24-5-5-2
+```
