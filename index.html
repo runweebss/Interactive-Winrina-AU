@@ -3,13 +3,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#d8cbb5">
 <title>Mavin's iPhone</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
-  --text: #fff;
-  --glass: rgba(242, 239, 231, .43);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+          "SF Pro Text", Inter, "Helvetica Neue", sans-serif;
   --blue: #087cff;
 }
 * { box-sizing: border-box; }
@@ -17,17 +21,14 @@
 html, body {
   margin: 0;
   min-height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "SF Pro Display", "Helvetica Neue", sans-serif;
+  font-family: var(--font);
   -webkit-font-smoothing: antialiased;
 }
-
 body {
   background: #ddd3c4;
   color: white;
   user-select: none;
 }
-
 button { font: inherit; cursor: pointer; }
 
 .phone {
@@ -41,212 +42,190 @@ button { font: inherit; cursor: pointer; }
   isolation: isolate;
   background: #b9a990;
 }
-
 .wallpaper {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image:
-    linear-gradient(to bottom, rgba(0,0,0,.10), transparent 35%, rgba(0,0,0,.08)),
-    url("camera-wallpaper.jpg");
-  background-size: cover;
-  background-position: center;
+  background:
+    linear-gradient(to bottom, #0002, transparent 35%, #0001),
+    url("./camera-wallpaper.jpg") center / cover no-repeat;
 }
 
+/* STATUS BAR */
 .statusbar {
-  height: 49px;
-  padding: 14px 27px 0;
+  height: 51px;
+  padding: max(13px, env(safe-area-inset-top)) 27px 0;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
   font-size: 15px;
+  line-height: 18px;
   font-weight: 650;
-  letter-spacing: -.3px;
-  text-shadow: 0 1px 5px #0004;
+  letter-spacing: -.25px;
+  text-shadow: 0 1px 4px #0006;
 }
-
 .status-icons {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 13px;
+  height: 16px;
 }
-
+.status-icons svg {
+  width: 16px;
+  height: 13px;
+  fill: currentColor;
+}
 .battery {
   width: 23px;
   height: 11px;
   border: 1.4px solid white;
   border-radius: 3px;
+  padding: 1.5px;
   position: relative;
-  padding: 1px;
 }
 .battery::before {
   content: "";
   display: block;
-  height: 100%;
   width: 78%;
+  height: 100%;
   background: white;
   border-radius: 1px;
 }
 .battery::after {
   content: "";
   position: absolute;
-  right: -3px;
+  right: -3.5px;
   top: 3px;
   width: 2px;
   height: 4px;
   background: white;
-  border-radius: 0 2px 2px 0;
 }
 
-.clock-area {
-  text-align: center;
-  margin-top: 25px;
-  text-shadow: 0 2px 12px #0003;
-}
-
-.date {
-  font-size: 19px;
-  font-weight: 570;
-  letter-spacing: -.4px;
-}
-
-.clock {
-  margin-top: 0;
-  font-size: clamp(76px, 21vw, 100px);
-  line-height: 1.12;
-  font-weight: 300;
-  letter-spacing: -5px;
-  font-variant-numeric: tabular-nums;
-}
-
-.searchbar {
-  height: 49px;
-  margin: 26px 27px 0;
-  border-radius: 28px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 19px;
-  background: rgba(242, 239, 231, .52);
-  border: 1px solid rgba(255,255,255,.15);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  color: white;
-  font-size: 17px;
-  text-shadow: 0 1px 4px #0002;
-}
-
-.search-icon {
-  font-size: 23px;
-  font-weight: 300;
-}
-
+/* HOME SCREEN */
 .apps {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  column-gap: 6px;
-  row-gap: 25px;
-  padding: 30px 18px 0;
+  column-gap: 5px;
+  row-gap: 24px;
+  padding: 35px 16px 0;
+  align-content: start;
 }
-
 .app {
+  min-width: 0;
+  padding: 0;
   border: 0;
   background: none;
   color: white;
-  min-width: 0;
-  padding: 0;
   text-align: center;
   -webkit-tap-highlight-color: transparent;
 }
-
 .app-icon {
-  width: min(68px, 17vw);
-  height: min(68px, 17vw);
-  max-width: 68px;
-  max-height: 68px;
-  min-width: 54px;
-  min-height: 54px;
+  width: 62px;
+  height: 62px;
+  max-width: 17vw;
+  max-height: 17vw;
+  min-width: 52px;
+  min-height: 52px;
   margin: auto;
-  border-radius: 22%;
+  border-radius: 22.4%;
   display: grid;
   place-items: center;
-  position: relative;
   overflow: hidden;
-  box-shadow: 0 3px 9px rgba(0,0,0,.12);
-  font-size: 35px;
-  line-height: 1;
-  transition: transform .12s;
+  position: relative;
+  box-shadow: 0 2px 7px #0002;
+  transition: transform .12s ease;
 }
-
+.app-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .app:active .app-icon { transform: scale(.91); }
 
 .app-label {
   display: block;
-  margin-top: 7px;
-  font-size: 12px;
-  font-weight: 450;
+  margin-top: 6px;
+  font-size: 11.5px;
   line-height: 15px;
+  font-weight: 400;
+  letter-spacing: -.15px;
   white-space: nowrap;
-  text-shadow: 0 1px 5px #0008;
+  text-shadow: 0 1px 4px #0008;
 }
 
-.wa { background: #25d366; }
+/* APP ICON BACKGROUNDS */
 .ig {
   background: radial-gradient(circle at 30% 105%,
-  #ffdc80 0%, #fcaf45 18%, #f77737 35%,
-  #e1306c 58%, #c13584 73%, #833ab4 100%);
+    #ffdc80 0%, #fcaf45 18%, #f77737 35%,
+    #e1306c 58%, #c13584 73%, #833ab4 100%);
 }
-.spotify { background: #1ed760; color: #101010; }
+.spotify { background: #1ed760; }
 .youtube { background: #ff0033; }
-.notes { background: linear-gradient(#fff,#f0f0f0); color: #efbd36; }
-.xapp { background: #111; }
+.notes { background: linear-gradient(#fff 0 24%, #f1f1f5 24%); }
+.xapp { background: #000; }
 .pin { background: #e60023; }
-.sudoku { background: #dfe8fa; color: #4e75c9; }
+.sudoku { background: #e7edfa; }
 .photos { background: #fff; }
-.safari { background: linear-gradient(145deg,#e4f5ff,#7bc5ff); }
-.memo { background: #e9e9ed; color: #888; }
+.wa { background: #25d366; }
+.safari { background: linear-gradient(145deg,#c8f1ff,#1688ff); }
+.memo { background: #ececf0; }
 
-.glyph {
-  font-family: Arial, sans-serif;
-  font-weight: 500;
+/* SEARCH */
+.searchbar {
+  position: absolute;
+  bottom: 132px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 20px;
+  background: #ffffff42;
+  border: 1px solid #ffffff35;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+  font-size: 14px;
+  text-shadow: 0 1px 4px #0004;
+  cursor: pointer;
 }
-.photos .glyph {
-  background: conic-gradient(#ff453a, #ff9f0a, #ffd60a,
-  #30d158, #64d2ff, #0a84ff, #bf5af2, #ff375f);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  font-size: 43px;
-}
-.ig .glyph { font-size: 37px; }
-.youtube .glyph { font-size: 29px; }
-.wa .glyph { font-size: 35px; }
-.spotify .glyph { font-size: 37px; }
+.searchbar svg { width: 15px; height: 15px; fill: white; }
 
+/* DOCK */
 .dock {
   position: absolute;
-  bottom: max(22px, env(safe-area-inset-bottom));
-  left: 16px;
-  right: 16px;
-  min-height: 98px;
-  padding: 12px 8px;
+  bottom: max(24px, calc(env(safe-area-inset-bottom) + 16px));
+  left: 15px;
+  right: 15px;
+  min-height: 91px;
+  padding: 12px 7px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
-  border-radius: 29px;
-  background: rgba(238, 231, 218, .57);
-  border: 1px solid rgba(255,255,255,.17);
-  backdrop-filter: blur(28px) saturate(150%);
-  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border-radius: 27px;
+  background: #eee7da66;
+  border: 1px solid #ffffff38;
+  box-shadow: inset 0 1px 0 #ffffff20;
+  backdrop-filter: blur(28px) saturate(155%);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+}
+.dock .app-label { display: none; }
+.dock .app-icon {
+  width: 58px;
+  height: 58px;
+  max-width: 15vw;
+  max-height: 15vw;
+  min-width: 48px;
+  min-height: 48px;
 }
 
-.dock .app-label { display: none; }
-.dock .app-icon { width: min(61px, 15.5vw); height: min(61px, 15.5vw); }
-
+/* HOME INDICATOR */
 .home-indicator {
   position: absolute;
-  bottom: 6px;
+  bottom: max(7px, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   width: 108px;
@@ -254,8 +233,49 @@ button { font: inherit; cursor: pointer; }
   border-radius: 9px;
   background: white;
   box-shadow: 0 1px 3px #0004;
+  z-index: 8;
 }
 
+/* LOCK SCREEN */
+.lock-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: none;
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 12px #0003;
+}
+.lock-screen.open { display: block; }
+.lock-date {
+  margin-top: 80px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.2px;
+}
+.lock-clock {
+  margin-top: 2px;
+  font-size: clamp(76px, 22vw, 100px);
+  line-height: 1.05;
+  font-weight: 300;
+  letter-spacing: -5px;
+  font-variant-numeric: tabular-nums;
+}
+.unlock {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 17px;
+  border: 1px solid #ffffff60;
+  border-radius: 24px;
+  background: #ffffff25;
+  color: white;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* APP SCREENS */
 .screen {
   position: absolute;
   inset: 0;
@@ -267,10 +287,9 @@ button { font: inherit; cursor: pointer; }
   overscroll-behavior: contain;
 }
 .screen.open { display: block; }
-
 .screen-top {
   padding: 57px 22px 20px;
-  background: rgba(255,255,255,.96);
+  background: #fffffffa;
   border-bottom: 1px solid #e4e4e9;
 }
 .back {
@@ -284,15 +303,16 @@ button { font: inherit; cursor: pointer; }
 .screen h2 {
   margin: 0;
   font-size: 31px;
-  font-weight: 720;
+  line-height: 1.1;
+  font-weight: 700;
   letter-spacing: -.8px;
 }
 .content { padding: 20px 16px 35px; }
 .card {
-  background: white;
-  border-radius: 15px;
   padding: 17px;
   margin-bottom: 12px;
+  border-radius: 15px;
+  background: white;
   box-shadow: 0 1px 3px #00000008;
 }
 .muted { color: #85858b; font-size: 14px; }
@@ -302,14 +322,15 @@ button { font: inherit; cursor: pointer; }
   color: var(--blue);
   text-decoration: none;
 }
-.home-button {
-  display: block;
-  margin: 28px auto 0;
+.note-input {
+  width: 100%;
+  min-height: 130px;
+  padding: 12px;
   border: 0;
-  background: #e2e2e8;
-  border-radius: 24px;
-  padding: 10px 22px;
-  color: #333;
+  border-radius: 12px;
+  background: #f2f2f7;
+  color: #222;
+  font: inherit;
 }
 .sudoku-grid {
   display: grid;
@@ -331,13 +352,20 @@ button { font: inherit; cursor: pointer; }
   body { padding: 12px 0; }
   .phone {
     height: min(900px, calc(100dvh - 24px));
-    border-radius: 42px;
     border: 7px solid #19191b;
+    border-radius: 42px;
   }
-  .home-indicator { bottom: 6px; }
+  .wallpaper { border-radius: 34px; }
+}
+@media (max-height: 700px) {
+  .apps { row-gap: 15px; padding-top: 23px; }
+  .app-icon { width: 56px; height: 56px; }
+  .dock { min-height: 80px; }
+  .dock .app-icon { width: 51px; height: 51px; }
 }
 </style>
 </head>
+
 <body>
 <main class="phone">
   <div class="wallpaper"></div>
@@ -345,27 +373,43 @@ button { font: inherit; cursor: pointer; }
   <div class="statusbar">
     <span id="statusTime">9:41</span>
     <div class="status-icons">
-      <span>◆</span><span>◔</span><span>▮▮</span>
+      <svg viewBox="0 0 18 14" aria-label="Cellular signal">
+        <path d="M1 12.5h2V10H1zm4 0h2V7H5zm4 0h2V4H9zm4 0h2V1H13z"/>
+      </svg>
+      <svg viewBox="0 0 18 14" aria-label="Wi-Fi">
+        <path d="M9 11a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM.5 4.5a12.2 12.2 0 0 1 17 0L15.8 6.3a9.7 9.7 0 0 0-13.6 0Zm3.2 3.2a7.6 7.6 0 0 1 10.6 0l-1.7 1.8a5.2 5.2 0 0 0-7.2 0Z"/>
+      </svg>
       <span class="battery"></span>
     </div>
   </div>
 
-  <section class="clock-area">
-    <div class="date" id="date">Wednesday, October 28</div>
-    <div class="clock" id="clock">9:41</div>
-  </section>
-
-  <div class="searchbar">
-    <span class="search-icon">⌕</span><span>Search</span>
-  </div>
-
   <section class="apps" id="apps"></section>
   <section class="dock" id="dock"></section>
+
+  <button class="searchbar" id="searchButton">
+    <svg viewBox="0 0 24 24">
+      <path d="M10.8 3a7.8 7.8 0 1 0 4.83 13.92l4.05 4.05 1.42-1.42-4.05-4.05A7.8 7.8 0 0 0 10.8 3Zm0 2a5.8 5.8 0 1 1 0 11.6 5.8 5.8 0 0 1 0-11.6Z"/>
+    </svg>
+    Search
+  </button>
+
   <div class="home-indicator"></div>
+
+  <section class="lock-screen" id="lockScreen">
+    <div class="statusbar">
+      <span id="lockStatusTime">9:41</span>
+      <div class="status-icons">
+        <span>●</span><span>◔</span><span class="battery"></span>
+      </div>
+    </div>
+    <div class="lock-date" id="lockDate">Wednesday, October 28</div>
+    <div class="lock-clock" id="lockClock">9:41</div>
+    <button class="unlock" id="unlockButton">Tap to unlock</button>
+  </section>
 
   <section class="screen" id="screen">
     <header class="screen-top">
-      <button class="back" onclick="goHome()">‹ &nbsp; Home</button>
+      <button class="back" id="backButton">‹ &nbsp; Home</button>
       <h2 id="appTitle">App</h2>
     </header>
     <div class="content" id="appContent"></div>
@@ -373,27 +417,129 @@ button { font: inherit; cursor: pointer; }
 </main>
 
 <script>
+/* SVG icons: vector-based instead of emoji or text characters. */
+const icons = {
+  Instagram: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="url(#igbg)"/>
+    <defs><linearGradient id="igbg" x1="0" y1="1" x2="1" y2="0">
+      <stop stop-color="#ffdc80"/><stop offset=".35" stop-color="#f77737"/>
+      <stop offset=".65" stop-color="#e1306c"/><stop offset="1" stop-color="#833ab4"/>
+    </linearGradient></defs>
+    <rect x="20" y="20" width="60" height="60" rx="18" fill="none" stroke="white" stroke-width="7"/>
+    <circle cx="50" cy="50" r="14" fill="none" stroke="white" stroke-width="7"/>
+    <circle cx="69" cy="31" r="4.5" fill="white"/>
+  </svg>`,
+
+  Spotify: `<svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="50" fill="#1ed760"/>
+    <g fill="none" stroke="#101010" stroke-linecap="round">
+      <path d="M22 38 Q50 27 78 42" stroke-width="7"/>
+      <path d="M27 51 Q51 42 74 54" stroke-width="6"/>
+      <path d="M32 64 Q51 57 69 66" stroke-width="5"/>
+    </g>
+  </svg>`,
+
+  YouTube: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#ff0033"/>
+    <rect x="18" y="29" width="64" height="42" rx="12" fill="white"/>
+    <path d="M44 38 L44 62 L64 50 Z" fill="#ff0033"/>
+  </svg>`,
+
+  Notes: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#f5f5f7"/>
+    <path d="M0 22H100V32H0Z" fill="#ffd54f"/>
+    <path d="M20 44H80 M20 57H80 M20 70H64" stroke="#c6c6cc" stroke-width="4" stroke-linecap="round"/>
+  </svg>`,
+
+  X: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#000"/>
+    <path d="M23 22H40L77 78H60Z" fill="white"/>
+    <path d="M24 78L48 49 M54 43L76 22" stroke="white" stroke-width="7"/>
+  </svg>`,
+
+  Pinterest: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#e60023"/>
+    <path d="M50 17C31 17 20 30 20 46c0 10 5 18 14 21l5-17c-2-3-3-6-3-9 0-9 6-16 16-16 10 0 16 6 16 16 0 11-5 20-13 20-4 0-7-4-6-8l4-13c1-5-2-9-6-9-5 0-9 5-9 12 0 4 1 7 2 9l-6 25c-1 5 0 11 0 11s5-6 7-11l4-14c2 4 7 7 12 7 16 0 27-14 27-32 0-15-13-26-34-26Z" fill="white"/>
+  </svg>`,
+
+  Sudoku: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#e7edfa"/>
+    <rect x="17" y="17" width="66" height="66" rx="5" fill="white" stroke="#5279c9" stroke-width="3"/>
+    <path d="M39 17V83 M61 17V83 M17 39H83 M17 61H83" stroke="#5279c9" stroke-width="2"/>
+    <g fill="#5279c9" font-family="Arial" font-size="15" font-weight="bold" text-anchor="middle">
+      <text x="28" y="33">1</text><text x="50" y="33">7</text><text x="72" y="33">3</text>
+      <text x="28" y="55">8</text><text x="50" y="55">2</text><text x="72" y="55">5</text>
+      <text x="28" y="77">4</text><text x="50" y="77">6</text><text x="72" y="77">9</text>
+    </g>
+  </svg>`,
+
+  Photos: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="white"/>
+    <g transform="translate(50 50)">
+      <ellipse cy="-17" rx="12" ry="21" fill="#ff453a"/>
+      <ellipse cx="17" cy="-1" rx="12" ry="21" transform="rotate(60 17 -1)" fill="#ff9f0a"/>
+      <ellipse cx="16" cy="17" rx="12" ry="21" transform="rotate(120 16 17)" fill="#ffd60a"/>
+      <ellipse cx="-1" cy="17" rx="12" ry="21" transform="rotate(180 -1 17)" fill="#30d158"/>
+      <ellipse cx="-17" cy="1" rx="12" ry="21" transform="rotate(240 -17 1)" fill="#0a84ff"/>
+      <ellipse cx="-16" cy="-17" rx="12" ry="21" transform="rotate(300 -16 -17)" fill="#bf5af2"/>
+      <circle r="9" fill="white"/>
+    </g>
+  </svg>`,
+
+  WhatsApp: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#25d366"/>
+    <path d="M50 17a32 32 0 0 0-27 49L19 82l17-4a32 32 0 1 0 14-61Z" fill="white"/>
+    <path d="M38 34c-3-3-5-1-7 2-3 4 0 11 5 17 5 7 12 12 19 14 5 2 9-1 11-4l-10-7-5 4c-5-2-9-6-11-11l3-4Z" fill="#25d366"/>
+  </svg>`,
+
+  Safari: `<svg viewBox="0 0 100 100">
+    <defs><linearGradient id="saf" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c7f2ff"/><stop offset="1" stop-color="#1688ff"/>
+    </linearGradient></defs>
+    <rect width="100" height="100" rx="22" fill="url(#saf)"/>
+    <circle cx="50" cy="50" r="35" fill="#fff" stroke="#d9f4ff" stroke-width="3"/>
+    <circle cx="50" cy="50" r="29" fill="#4bb8ff"/>
+    <path d="M62 30L54 53L38 70L46 47Z" fill="#ff453a"/>
+    <path d="M38 70L46 47L62 30L54 53Z" fill="white"/>
+  </svg>`,
+
+  Memo: `<svg viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" fill="#ececf0"/>
+    <rect x="22" y="17" width="56" height="66" rx="7" fill="white" stroke="#d0d0d6" stroke-width="2"/>
+    <path d="M32 35H68 M32 47H68 M32 59H58" stroke="#c1c1c8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M55 76L61 61L76 46L85 55L70 70Z" fill="#85858f" stroke="white" stroke-width="2"/>
+  </svg>`
+};
+
 const applications = [
-  {name:"Instagram", glyph:"◎", cls:"ig", desc:"Mavin's Photos"},
-  {name:"Spotify", glyph:"♫", cls:"spotify", desc:"Mavin's Playlist"},
-  {name:"YouTube", glyph:"▶", cls:"youtube", desc:"aespa — Lemonade"},
-  {name:"Notes", glyph:"▤", cls:"notes", desc:"Mavin's Thoughts"},
-  {name:"X", glyph:"𝕏", cls:"xapp", desc:"Mavin's private account"},
-  {name:"Pinterest", glyph:"P", cls:"pin", desc:"Random Thing About Mavin"},
-  {name:"Sudoku", glyph:"▦", cls:"sudoku", desc:"Sudoku demo"},
-  {name:"Photos", glyph:"🌈", cls:"photos", desc:"Mavin's Camera Roll", dock:true},
-  {name:"WhatsApp", glyph:"☎", cls:"wa", desc:"Mavin's Messages", dock:true},
-  {name:"Safari", glyph:"🧭", cls:"safari", desc:"Web browser", dock:true},
-  {name:"Memo", glyph:"✎", cls:"memo", desc:"Quick notes", dock:true}
+  {name:"Instagram", icon:"Instagram", cls:"ig", desc:"Mavin's Photos"},
+  {name:"Spotify", icon:"Spotify", cls:"spotify", desc:"Mavin's Playlist"},
+  {name:"YouTube", icon:"YouTube", cls:"youtube", desc:"aespa — Lemonade"},
+  {name:"Notes", icon:"Notes", cls:"notes", desc:"Mavin's Thoughts"},
+  {name:"X", icon:"X", cls:"xapp", desc:"Mavin's private account"},
+  {name:"Pinterest", icon:"Pinterest", cls:"pin", desc:"Random Thing About Mavin"},
+  {name:"Sudoku", icon:"Sudoku", cls:"sudoku", desc:"Sudoku demo"},
+  {name:"Photos", icon:"Photos", cls:"photos", desc:"Mavin's Camera Roll", dock:true},
+  {name:"WhatsApp", icon:"WhatsApp", cls:"wa", desc:"Mavin's Messages", dock:true},
+  {name:"Safari", icon:"Safari", cls:"safari", desc:"Web browser", dock:true},
+  {name:"Memo", icon:"Memo", cls:"memo", desc:"Quick notes", dock:true}
 ];
 
 function makeApp(app) {
   const button = document.createElement("button");
   button.className = "app";
+  button.type = "button";
   button.setAttribute("aria-label", app.name);
-  button.innerHTML = `<div class="app-icon ${app.cls}">
-    <span class="glyph">${app.glyph}</span>
-    </div><span class="app-label">${app.name}</span>`;
+
+  const icon = document.createElement("div");
+  icon.className = "app-icon " + app.cls;
+  icon.innerHTML = icons[app.icon];
+
+  const label = document.createElement("span");
+  label.className = "app-label";
+  label.textContent = app.name;
+
+  button.append(icon, label);
   button.addEventListener("click", () => openApp(app));
   return button;
 }
@@ -403,11 +549,21 @@ applications.forEach(app => {
     .appendChild(makeApp(app));
 });
 
+function addLink(parent, href, text) {
+  const link = document.createElement("a");
+  link.className = "link";
+  link.href = href;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = text;
+  parent.appendChild(link);
+}
+
 function openApp(app) {
   const screen = document.getElementById("screen");
-  const title = document.getElementById("appTitle");
   const content = document.getElementById("appContent");
-  title.textContent = app.name;
+
+  document.getElementById("appTitle").textContent = app.name;
   content.replaceChildren();
 
   const card = document.createElement("div");
@@ -428,33 +584,34 @@ function openApp(app) {
     for (let i = 0; i < 9; i++) {
       const cell = document.createElement("button");
       cell.textContent = i + 1;
-      cell.onclick = () => {
+      cell.addEventListener("click", () => {
         cell.textContent = cell.textContent === "·" ? i + 1 : "·";
-      };
+      });
       grid.appendChild(cell);
     }
     content.appendChild(grid);
-    note.textContent = "Demo grid — tap a cell to change it.";
+    note.textContent = "Demo grid. Tap a cell to change it.";
   }
 
-  if (app.name === "YouTube") {
-    const link = document.createElement("a");
-    link.className = "link";
-    link.href = "https://www.youtube.com/results?search_query=aespa+Lemonade";
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Search aespa — Lemonade on YouTube ↗";
-    content.appendChild(link);
+  if (app.name === "Notes" || app.name === "Memo") {
+    const input = document.createElement("textarea");
+    input.className = "note-input";
+    input.placeholder = "Write a note...";
+    content.appendChild(input);
   }
 
-  if (app.name === "Spotify") {
-    const link = document.createElement("a");
-    link.className = "link";
-    link.href = "https://open.spotify.com/";
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Open Spotify ↗";
-    content.appendChild(link);
+  const links = {
+    YouTube: ["https://www.youtube.com/results?search_query=aespa+Lemonade", "Search aespa — Lemonade on YouTube ↗"],
+    Spotify: ["https://open.spotify.com/", "Open Spotify ↗"],
+    Instagram: ["https://www.instagram.com/", "Open Instagram ↗"],
+    WhatsApp: ["https://web.whatsapp.com/", "Open WhatsApp Web ↗"],
+    X: ["https://x.com/", "Open X ↗"],
+    Pinterest: ["https://www.pinterest.com/", "Open Pinterest ↗"],
+    Safari: ["https://www.google.com/", "Open web search ↗"]
+  };
+
+  if (links[app.name]) {
+    addLink(content, links[app.name][0], links[app.name][1]);
   }
 
   screen.classList.add("open");
@@ -463,21 +620,47 @@ function openApp(app) {
 function goHome() {
   document.getElementById("screen").classList.remove("open");
 }
+document.getElementById("backButton").addEventListener("click", goHome);
 
+/* Search button: filters installed mock apps. */
+document.getElementById("searchButton").addEventListener("click", () => {
+  const query = prompt("Search apps");
+  if (!query) return;
+  const found = applications.find(a =>
+    a.name.toLowerCase().includes(query.toLowerCase())
+  );
+  if (found) openApp(found);
+  else alert("No apps found");
+});
+
+/* Clock and date */
 function updateClock() {
   const now = new Date();
-  const time = now.toLocaleTimeString("en-US", {
-    hour:"2-digit", minute:"2-digit", hour12:false
+  const time24 = now.toLocaleTimeString("en-GB", {
+    hour: "2-digit", minute: "2-digit", hour12: false
   });
-  document.getElementById("clock").textContent = time;
-  document.getElementById("statusTime").textContent = time;
-  document.getElementById("date").textContent =
+  const time12 = now.toLocaleTimeString("en-US", {
+    hour: "numeric", minute: "2-digit", hour12: true
+  }).replace(/\s/g, "");
+
+  document.getElementById("statusTime").textContent = time24;
+  document.getElementById("lockStatusTime").textContent = time24;
+  document.getElementById("lockClock").textContent = time12.replace(/AM|PM/i, "");
+  document.getElementById("lockDate").textContent =
     now.toLocaleDateString("en-US", {
-      weekday:"long", month:"long", day:"numeric"
+      weekday: "long", month: "long", day: "numeric"
     });
 }
 updateClock();
 setInterval(updateClock, 30000);
+
+/* Optional lock-screen preview: add ?lock to the page URL. */
+document.getElementById("unlockButton").addEventListener("click", () => {
+  document.getElementById("lockScreen").classList.remove("open");
+});
+if (new URLSearchParams(location.search).has("lock")) {
+  document.getElementById("lockScreen").classList.add("open");
+}
 </script>
 </body>
 </html>
