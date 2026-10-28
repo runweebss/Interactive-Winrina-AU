@@ -347,4 +347,202 @@ html, body {
 }
 .calc-grid button.op { background: #ff9f0a; color: #fff; }
 .calc-grid button.fn { background: #a5a5a5; color: #000; }
-.calc-grid button.zero { border-radius: 35px; aspect-ratio: auto; grid
+.calc-grid button.zero { border-radius: 35px; aspect-ratio: auto; grid-column: span 2; text-align: left; padding-left: 22px; }
+
+/* Sudoku Grid */
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+.sudoku-grid button {
+  aspect-ratio: 1;
+  border: 1px solid #d1d1d6;
+  background: white;
+  color: var(--ios-blue);
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>  
+</head>  
+<body>  
+
+<main class="phone">  
+  <div class="wallpaper"></div> 
+  
+  <!-- Dynamic Island -->
+  <div class="dynamic-island">
+    <div class="camera-lens"></div>
+  </div>   
+
+  <!-- Status Bar -->
+  <div class="statusbar">  
+    <span id="statusTime">09:41</span>  
+    <div class="status-icons">  
+      <i class="fa-solid fa-signal"></i>
+      <i class="fa-solid fa-wifi"></i>
+      <i class="fa-solid fa-battery-full" style="font-size: 13px;"></i>
+    </div>  
+  </div>    
+
+  <!-- Medium Weather Widget iOS -->
+  <section class="widget-area">
+    <div class="weather-widget" onclick="openWeatherInfo()">
+      <div class="weather-top">
+        <div>
+          <div class="city-name">Jakarta</div>
+          <div class="weather-temp">28°</div>
+        </div>
+        <div style="font-size: 30px;">⛅</div>
+      </div>
+      <div class="weather-condition">Cerah Berawan</div>
+      <div class="weather-hl">T:32° L:24°</div>
+    </div>
+  </section>
+
+  <!-- Grid Aplikasi -->
+  <section class="apps" id="apps"></section>  
+  
+  <!-- Dock Aplikasi Bawah -->
+  <div class="dock-container">
+    <section class="dock" id="dock"></section>  
+  </div>
+  
+  <!-- Home Indicator -->
+  <div class="home-indicator" onclick="goHome()"></div>    
+
+  <!-- Halaman Aplikasi -->
+  <section class="screen" id="screen">  
+    <header class="screen-top">  
+      <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Beranda</button>  
+      <h2 id="appTitle">Aplikasi</h2>  
+      <span style="width: 50px;"></span>
+    </header>  
+    <div class="content" id="appContent"></div>  
+  </section>  
+</main>  
+
+<script>  
+const applications = [  
+  {name:"Instagram", icon:"fa-brands fa-instagram", cls:"ig", desc:"Foto & Reel Mavin"},  
+  {name:"Spotify", icon:"fa-brands fa-spotify", cls:"spotify", desc:"Daftar Putar Musik Mavin"},  
+  {name:"YouTube", icon:"fa-brands fa-youtube", cls:"youtube", desc:"aespa — Lemonade"},  
+  {name:"Notes", icon:"fa-solid fa-align-left", cls:"notes", desc:"Catatan Rahasia Mavin"},  
+  {name:"X", icon:"fa-solid fa-x", cls:"xapp", desc:"Akun Pribadi Mavin"},  
+  {name:"Pinterest", icon:"fa-brands fa-pinterest", cls:"pin", desc:"Inspirasi Mavin"},  
+  {name:"Sudoku", icon:"fa-solid fa-grip", cls:"sudoku", desc:"Game Sudoku Interaktif"},  
+  {name:"Kalkulator", icon:"fa-solid fa-calculator", cls:"calc", desc:"Kalkulator Sederhana", dock:true},  
+  {name:"WhatsApp", icon:"fa-brands fa-whatsapp", cls:"wa", desc:"Pesan WhatsApp", dock:true},  
+  {name:"Foto", icon:"fa-solid fa-circle-notch", cls:"photos-bg photos", desc:"Galeri Foto Mavin", dock:true},  
+  {name:"Catatan", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Cepat Mavin", dock:true}  
+];  
+
+function makeApp(app) {  
+  const button = document.createElement("button");  
+  button.className = "app";  
+  button.setAttribute("aria-label", app.name);  
+  button.innerHTML = `<div class="app-icon ${app.cls}">  
+      <i class="${app.icon}"></i>  
+    </div><span class="app-label">${app.name}</span>`;  
+  button.addEventListener("click", () => openApp(app));  
+  return button;  
+}  
+
+applications.forEach(app => {  
+  document.getElementById(app.dock ? "dock" : "apps")  
+    .appendChild(makeApp(app));  
+});  
+
+function openApp(app) {  
+  const screen = document.getElementById("screen");  
+  const title = document.getElementById("appTitle");  
+  const content = document.getElementById("appContent");  
+  
+  title.textContent = app.name;  
+  content.replaceChildren();  
+
+  const card = document.createElement("div");  
+  card.className = "card";  
+  const heading = document.createElement("strong");  
+  heading.textContent = app.desc;  
+  card.appendChild(heading);  
+  content.appendChild(card);  
+
+  if (app.name === "Sudoku") {  
+    const grid = document.createElement("div");  
+    grid.className = "sudoku-grid";  
+    for (let i = 0; i < 9; i++) {  
+      const cell = document.createElement("button");  
+      cell.textContent = i + 1;  
+      cell.onclick = () => {  
+        cell.textContent = cell.textContent === "·" ? i + 1 : "·";  
+      };  
+      grid.appendChild(cell);  
+    }  
+    content.appendChild(grid);  
+  }  
+
+  if (app.name === "Kalkulator") {  
+    const display = document.createElement("div");  
+    display.className = "calc-display";  
+    display.textContent = "0";  
+    content.appendChild(display);  
+
+    const grid = document.createElement("div");  
+    grid.className = "calc-grid";  
+    const buttons = [  
+      {t:"AC", c:"fn"}, {t:"+/−", c:"fn"}, {t:"%", c:"fn"}, {t:"÷", c:"op"},  
+      {t:"7"}, {t:"8"}, {t:"9"}, {t:"×", c:"op"},  
+      {t:"4"}, {t:"5"}, {t:"6"}, {t:"-", c:"op"},  
+      {t:"1"}, {t:"2"}, {t:"3"}, {t:"+", c:"op"},  
+      {t:"0", cls:"zero"}, {t:","}, {t:"=", c:"op"}  
+    ];  
+    buttons.forEach(b => {  
+      const btn = document.createElement("button");  
+      btn.textContent = b.t;  
+      if (b.c) btn.className = b.c;  
+      if (b.cls) btn.className += " " + b.cls;  
+      grid.appendChild(btn);  
+    });  
+    content.appendChild(grid);  
+  }  
+
+  screen.classList.add("open");  
+}  
+
+function openWeatherInfo() {
+  const screen = document.getElementById("screen");  
+  const title = document.getElementById("appTitle");  
+  const content = document.getElementById("appContent");  
+  
+  title.textContent = "Cuaca";  
+  content.replaceChildren();  
+
+  const card = document.createElement("div");  
+  card.className = "card";  
+  card.innerHTML = "<strong>Prakiraan Cuaca Jakarta</strong><p style='margin-top:8px; color:#666;'>Suhu saat ini 28°C dengan kelembapan 65%. Angin berhembus lembut 8 km/jam.</p>";  
+  content.appendChild(card);  
+
+  screen.classList.add("open");
+}
+
+function goHome() {  
+  document.getElementById("screen").classList.remove("open");  
+}  
+
+/* Jam Real-time */
+function updateClock() {  
+  const now = new Date();  
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById("statusTime").textContent = `${hours}:${minutes}`;  
+}  
+
+setInterval(updateClock, 1000);  
+updateClock();  
+</script>  
+</body>  
+</html>
