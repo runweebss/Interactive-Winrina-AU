@@ -1,32 +1,29 @@
-<!DOCTYPE html>  
-<html lang="id">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
-<title>Mavin's iPhone</title>  
-<!-- CDN Font SF Pro & Font Awesome -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>iPhone Screen</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>  
+<style>
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display-chrome');
 
-:root {  
-  --ios-blue: #007aff;  
-  --ios-bg: #f2f2f7;
-}  
+:root {
+  --ios-blue: #007aff;
+}
 
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   margin: 0;
   padding: 0;
-}  
+}
 
 html, body {
   height: 100dvh;
   width: 100vw;
-  background: #0d0d0d;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #000;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   -webkit-font-smoothing: antialiased;
   display: flex;
   justify-content: center;
@@ -35,21 +32,17 @@ html, body {
   user-select: none;
 }
 
-/* Frame HP Rasio 9:16 Presisi */
 .phone {
   position: relative;
-  width: min(100vw, 410px);
-  aspect-ratio: 9 / 16;
-  max-height: 96dvh;
-  background: #000;
-  border-radius: 46px;
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  margin: auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 0 10px #222, 0 20px 50px rgba(0,0,0,0.8);
 }
 
-/* Wallpaper Tautan Kamu */
 .wallpaper {
   position: absolute;
   inset: 0;
@@ -59,67 +52,64 @@ html, body {
   background-position: center;
 }
 
-/* Dynamic Island */
 .dynamic-island {
   position: absolute;
-  top: 10px;
+  top: 11px;
   left: 50%;
   transform: translateX(-50%);
-  width: 118px;
-  height: 32px;
+  width: 120px;
+  height: 35px;
   background: #000;
   border-radius: 20px;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 .camera-lens {
-  width: 11px;
-  height: 11px;
-  background: #141414;
+  width: 12px;
+  height: 12px;
+  background: #111;
   border-radius: 50%;
   box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
 }
 
-/* Status Bar */
 .statusbar {
-  height: 44px;
-  padding: 12px 24px 0;
+  height: 48px;
+  padding: 14px 26px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
   color: #fff;
   z-index: 15;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .status-icons {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 7px;
+  font-size: 13px;
 }
 
-/* Widget Cuaca iOS Medium Widget */
 .widget-area {
-  margin: 10px 18px 0;
+  margin: 12px 18px 0;
   z-index: 10;
 }
 
 .weather-widget {
-  background: rgba(25, 25, 25, 0.45);
-  backdrop-filter: blur(35px) saturate(180%);
-  -webkit-backdrop-filter: blur(35px) saturate(180%);
+  background: rgba(30, 30, 30, 0.4);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 22px;
-  padding: 14px 18px;
+  padding: 16px 20px;
   color: white;
-  border: 0.5px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
 
@@ -130,13 +120,13 @@ html, body {
 }
 
 .city-name {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.2px;
 }
 
 .weather-temp {
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 200;
   line-height: 1;
   margin-top: 2px;
@@ -154,13 +144,12 @@ html, body {
   opacity: 0.75;
 }
 
-/* Grid Aplikasi iOS */
 .apps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  row-gap: 18px;
-  column-gap: 10px;
-  padding: 18px 16px 0;
+  row-gap: 22px;
+  column-gap: 12px;
+  padding: 22px 18px 0;
   flex: 1;
   z-index: 10;
 }
@@ -176,40 +165,35 @@ html, body {
 }
 
 .app-icon {
-  width: 58px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
   border-radius: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  font-size: 26px;
+  font-size: 28px;
   color: white;
   position: relative;
   overflow: hidden;
-  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.12s ease;
 }
 
 .app:active .app-icon { transform: scale(0.86); }
 
 .app-label {
-  margin-top: 4px;
+  margin-top: 5px;
   font-size: 11px;
-  font-weight: 450;
+  font-weight: 400;
   letter-spacing: -0.2px;
   text-shadow: 0 1px 4px rgba(0,0,0,0.8);
   white-space: nowrap;
 }
 
-/* Kustomisasi Ikon Presisi iOS */
 .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
 .spotify { background: #1ed760; color: #000; }
 .youtube { background: #ff0000; }
-.notes { 
-  background: #ffffff; 
-  color: #333; 
-  position: relative;
-}
+.notes { background: #ffffff; color: #333; position: relative; }
 .notes::before {
   content: "";
   position: absolute;
@@ -220,28 +204,21 @@ html, body {
 .xapp { background: #000000; color: #ffffff; font-size: 24px; font-weight: bold; }
 .pin { background: #e60023; }
 .sudoku { background: linear-gradient(135deg, #007aff, #0040dd); color: #fff; }
-.photos { 
-  background: #ffffff; 
-  background: conic-gradient(#ff3b30, #ff9f0a, #ffd60a, #34c759, #007aff, #5856d6, #ff2d55, #ff3b30);
-  -webkit-mask: radial-gradient(circle, transparent 30%, black 31%);
-  mask: radial-gradient(circle, transparent 30%, black 31%);
-}
-.photos-bg { background: #fff; }
+.photos-bg { background: #fff; color: #ff3b30; }
 .calc { background: #1c1c1e; color: #ff9f0a; }
 .wa { background: #25d366; }
 
-/* Dock Bawah Glassmorphism iOS */
 .dock-container {
-  padding: 0 12px 16px;
+  padding: 0 12px 20px;
   z-index: 10;
 }
 
 .dock {
-  padding: 10px 8px;
+  padding: 12px 10px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  border-radius: 32px;
+  gap: 12px;
+  border-radius: 35px;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(35px) saturate(180%);
   -webkit-backdrop-filter: blur(35px) saturate(180%);
@@ -249,22 +226,20 @@ html, body {
 }
 
 .dock .app-label { display: none; }
-.dock .app-icon { width: 56px; height: 56px; margin: auto; }
+.dock .app-icon { width: 60px; height: 60px; margin: auto; }
 
-/* Home Indicator */
 .home-indicator {
   position: absolute;
   bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 125px;
-  height: 4.5px;
+  width: 134px;
+  height: 5px;
   border-radius: 10px;
   background: white;
   z-index: 25;
 }
 
-/* Halaman Dalam Aplikasi */
 .screen {
   position: absolute;
   inset: 0;
@@ -274,13 +249,13 @@ html, body {
   background: #f2f2f7;
   color: #000;
   transform: translateY(100%);
-  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .screen.open { transform: translateY(0); }
 
 .screen-top {
-  padding: 48px 16px 12px;
+  padding: 52px 16px 12px;
   background: rgba(249, 249, 249, 0.94);
   backdrop-filter: blur(20px);
   border-bottom: 0.5px solid rgba(0,0,0,0.1);
@@ -293,8 +268,7 @@ html, body {
   border: 0;
   background: none;
   color: var(--ios-blue);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 17px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -302,12 +276,12 @@ html, body {
 }
 
 .screen h2 {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
 }
 
-.content { 
-  padding: 16px; 
+.content {
+  padding: 16px;
   flex: 1;
   overflow-y: auto;
 }
@@ -320,42 +294,44 @@ html, body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
-/* Kalkulator iOS Style */
 .calc-display {
   background: #000;
   color: #fff;
-  font-size: 46px;
+  font-size: 52px;
   text-align: right;
-  padding: 18px;
+  padding: 20px;
   border-radius: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
   font-weight: 300;
 }
+
 .calc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
+
 .calc-grid button {
   aspect-ratio: 1;
   border: 0;
   border-radius: 50%;
   background: #333333;
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
   cursor: pointer;
 }
+
 .calc-grid button.op { background: #ff9f0a; color: #fff; }
 .calc-grid button.fn { background: #a5a5a5; color: #000; }
-.calc-grid button.zero { border-radius: 35px; aspect-ratio: auto; grid-column: span 2; text-align: left; padding-left: 22px; }
+.calc-grid button.zero { border-radius: 40px; aspect-ratio: auto; grid-column: span 2; text-align: left; padding-left: 26px; }
 
-/* Sudoku Grid */
 .sudoku-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
-  margin-top: 14px;
+  margin-top: 15px;
 }
+
 .sudoku-grid button {
   aspect-ratio: 1;
   border: 1px solid #d1d1d6;
@@ -366,29 +342,26 @@ html, body {
   border-radius: 8px;
   cursor: pointer;
 }
-</style>  
-</head>  
-<body>  
+</style>
+</head>
+<body>
 
-<main class="phone">  
-  <div class="wallpaper"></div> 
+<main class="phone">
+  <div class="wallpaper"></div>
   
-  <!-- Dynamic Island -->
   <div class="dynamic-island">
     <div class="camera-lens"></div>
-  </div>   
+  </div>
 
-  <!-- Status Bar -->
-  <div class="statusbar">  
-    <span id="statusTime">09:41</span>  
-    <div class="status-icons">  
+  <div class="statusbar">
+    <span id="statusTime">09:41</span>
+    <div class="status-icons">
       <i class="fa-solid fa-signal"></i>
       <i class="fa-solid fa-wifi"></i>
-      <i class="fa-solid fa-battery-full" style="font-size: 13px;"></i>
-    </div>  
-  </div>    
+      <i class="fa-solid fa-battery-full" style="font-size: 14px;"></i>
+    </div>
+  </div>
 
-  <!-- Medium Weather Widget iOS -->
   <section class="widget-area">
     <div class="weather-widget" onclick="openWeatherInfo()">
       <div class="weather-top">
@@ -396,153 +369,148 @@ html, body {
           <div class="city-name">Jakarta</div>
           <div class="weather-temp">28°</div>
         </div>
-        <div style="font-size: 30px;">⛅</div>
+        <div style="font-size: 32px;">⛅</div>
       </div>
       <div class="weather-condition">Cerah Berawan</div>
       <div class="weather-hl">T:32° L:24°</div>
     </div>
   </section>
 
-  <!-- Grid Aplikasi -->
-  <section class="apps" id="apps"></section>  
+  <section class="apps" id="apps"></section>
   
-  <!-- Dock Aplikasi Bawah -->
   <div class="dock-container">
-    <section class="dock" id="dock"></section>  
+    <section class="dock" id="dock"></section>
   </div>
   
-  <!-- Home Indicator -->
-  <div class="home-indicator" onclick="goHome()"></div>    
+  <div class="home-indicator" onclick="goHome()"></div>
 
-  <!-- Halaman Aplikasi -->
-  <section class="screen" id="screen">  
-    <header class="screen-top">  
-      <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Beranda</button>  
-      <h2 id="appTitle">Aplikasi</h2>  
+  <section class="screen" id="screen">
+    <header class="screen-top">
+      <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Beranda</button>
+      <h2 id="appTitle">Aplikasi</h2>
       <span style="width: 50px;"></span>
-    </header>  
-    <div class="content" id="appContent"></div>  
-  </section>  
-</main>  
+    </header>
+    <div class="content" id="appContent"></div>
+  </section>
+</main>
 
-<script>  
-const applications = [  
-  {name:"Instagram", icon:"fa-brands fa-instagram", cls:"ig", desc:"Foto & Reel Mavin"},  
-  {name:"Spotify", icon:"fa-brands fa-spotify", cls:"spotify", desc:"Daftar Putar Musik Mavin"},  
-  {name:"YouTube", icon:"fa-brands fa-youtube", cls:"youtube", desc:"aespa — Lemonade"},  
-  {name:"Notes", icon:"fa-solid fa-align-left", cls:"notes", desc:"Catatan Rahasia Mavin"},  
-  {name:"X", icon:"fa-solid fa-x", cls:"xapp", desc:"Akun Pribadi Mavin"},  
-  {name:"Pinterest", icon:"fa-brands fa-pinterest", cls:"pin", desc:"Inspirasi Mavin"},  
-  {name:"Sudoku", icon:"fa-solid fa-grip", cls:"sudoku", desc:"Game Sudoku Interaktif"},  
-  {name:"Kalkulator", icon:"fa-solid fa-calculator", cls:"calc", desc:"Kalkulator Sederhana", dock:true},  
-  {name:"WhatsApp", icon:"fa-brands fa-whatsapp", cls:"wa", desc:"Pesan WhatsApp", dock:true},  
-  {name:"Foto", icon:"fa-solid fa-circle-notch", cls:"photos-bg photos", desc:"Galeri Foto Mavin", dock:true},  
-  {name:"Catatan", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Cepat Mavin", dock:true}  
-];  
+<script>
+const applications = [
+  {name:"Instagram", icon:"fa-brands fa-instagram", cls:"ig", desc:"Foto & Reel Mavin"},
+  {name:"Spotify", icon:"fa-brands fa-spotify", cls:"spotify", desc:"Daftar Putar Musik Mavin"},
+  {name:"YouTube", icon:"fa-brands fa-youtube", cls:"youtube", desc:"aespa — Lemonade"},
+  {name:"Notes", icon:"fa-solid fa-align-left", cls:"notes", desc:"Catatan Rahasia Mavin"},
+  {name:"X", icon:"fa-solid fa-x", cls:"xapp", desc:"Akun Pribadi Mavin"},
+  {name:"Pinterest", icon:"fa-brands fa-pinterest", cls:"pin", desc:"Inspirasi Mavin"},
+  {name:"Sudoku", icon:"fa-solid fa-grip", cls:"sudoku", desc:"Game Sudoku Interaktif"},
+  {name:"Kalkulator", icon:"fa-solid fa-calculator", cls:"calc", desc:"Kalkulator Sederhana", dock:true},
+  {name:"WhatsApp", icon:"fa-brands fa-whatsapp", cls:"wa", desc:"Pesan WhatsApp", dock:true},
+  {name:"Foto", icon:"fa-solid fa-images", cls:"photos-bg", desc:"Galeri Foto Mavin", dock:true},
+  {name:"Catatan", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Cepat Mavin", dock:true}
+];
 
-function makeApp(app) {  
-  const button = document.createElement("button");  
-  button.className = "app";  
-  button.setAttribute("aria-label", app.name);  
-  button.innerHTML = `<div class="app-icon ${app.cls}">  
-      <i class="${app.icon}"></i>  
-    </div><span class="app-label">${app.name}</span>`;  
-  button.addEventListener("click", () => openApp(app));  
-  return button;  
-}  
+function makeApp(app) {
+  const button = document.createElement("button");
+  button.className = "app";
+  button.setAttribute("aria-label", app.name);
+  button.innerHTML = `<div class="app-icon ${app.cls}">
+      <i class="${app.icon}"></i>
+    </div><span class="app-label">${app.name}</span>`;
+  button.addEventListener("click", () => openApp(app));
+  return button;
+}
 
-applications.forEach(app => {  
-  document.getElementById(app.dock ? "dock" : "apps")  
-    .appendChild(makeApp(app));  
-});  
+applications.forEach(app => {
+  document.getElementById(app.dock ? "dock" : "apps")
+    .appendChild(makeApp(app));
+});
 
-function openApp(app) {  
-  const screen = document.getElementById("screen");  
-  const title = document.getElementById("appTitle");  
-  const content = document.getElementById("appContent");  
+function openApp(app) {
+  const screen = document.getElementById("screen");
+  const title = document.getElementById("appTitle");
+  const content = document.getElementById("appContent");
   
-  title.textContent = app.name;  
-  content.replaceChildren();  
+  title.textContent = app.name;
+  content.replaceChildren();
 
-  const card = document.createElement("div");  
-  card.className = "card";  
-  const heading = document.createElement("strong");  
-  heading.textContent = app.desc;  
-  card.appendChild(heading);  
-  content.appendChild(card);  
+  const card = document.createElement("div");
+  card.className = "card";
+  const heading = document.createElement("strong");
+  heading.textContent = app.desc;
+  card.appendChild(heading);
+  content.appendChild(card);
 
-  if (app.name === "Sudoku") {  
-    const grid = document.createElement("div");  
-    grid.className = "sudoku-grid";  
-    for (let i = 0; i < 9; i++) {  
-      const cell = document.createElement("button");  
-      cell.textContent = i + 1;  
-      cell.onclick = () => {  
-        cell.textContent = cell.textContent === "·" ? i + 1 : "·";  
-      };  
-      grid.appendChild(cell);  
-    }  
-    content.appendChild(grid);  
-  }  
+  if (app.name === "Sudoku") {
+    const grid = document.createElement("div");
+    grid.className = "sudoku-grid";
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement("button");
+      cell.textContent = i + 1;
+      cell.onclick = () => {
+        cell.textContent = cell.textContent === "·" ? i + 1 : "·";
+      };
+      grid.appendChild(cell);
+    }
+    content.appendChild(grid);
+  }
 
-  if (app.name === "Kalkulator") {  
-    const display = document.createElement("div");  
-    display.className = "calc-display";  
-    display.textContent = "0";  
-    content.appendChild(display);  
+  if (app.name === "Kalkulator") {
+    const display = document.createElement("div");
+    display.className = "calc-display";
+    display.textContent = "0";
+    content.appendChild(display);
 
-    const grid = document.createElement("div");  
-    grid.className = "calc-grid";  
-    const buttons = [  
-      {t:"AC", c:"fn"}, {t:"+/−", c:"fn"}, {t:"%", c:"fn"}, {t:"÷", c:"op"},  
-      {t:"7"}, {t:"8"}, {t:"9"}, {t:"×", c:"op"},  
-      {t:"4"}, {t:"5"}, {t:"6"}, {t:"-", c:"op"},  
-      {t:"1"}, {t:"2"}, {t:"3"}, {t:"+", c:"op"},  
-      {t:"0", cls:"zero"}, {t:","}, {t:"=", c:"op"}  
-    ];  
-    buttons.forEach(b => {  
-      const btn = document.createElement("button");  
-      btn.textContent = b.t;  
-      if (b.c) btn.className = b.c;  
-      if (b.cls) btn.className += " " + b.cls;  
-      grid.appendChild(btn);  
-    });  
-    content.appendChild(grid);  
-  }  
-
-  screen.classList.add("open");  
-}  
-
-function openWeatherInfo() {
-  const screen = document.getElementById("screen");  
-  const title = document.getElementById("appTitle");  
-  const content = document.getElementById("appContent");  
-  
-  title.textContent = "Cuaca";  
-  content.replaceChildren();  
-
-  const card = document.createElement("div");  
-  card.className = "card";  
-  card.innerHTML = "<strong>Prakiraan Cuaca Jakarta</strong><p style='margin-top:8px; color:#666;'>Suhu saat ini 28°C dengan kelembapan 65%. Angin berhembus lembut 8 km/jam.</p>";  
-  content.appendChild(card);  
+    const grid = document.createElement("div");
+    grid.className = "calc-grid";
+    const buttons = [
+      {t:"AC", c:"fn"}, {t:"+/−", c:"fn"}, {t:"%", c:"fn"}, {t:"÷", c:"op"},
+      {t:"7"}, {t:"8"}, {t:"9"}, {t:"×", c:"op"},
+      {t:"4"}, {t:"5"}, {t:"6"}, {t:"-", c:"op"},
+      {t:"1"}, {t:"2"}, {t:"3"}, {t:"+", c:"op"},
+      {t:"0", cls:"zero"}, {t:","}, {t:"=", c:"op"}
+    ];
+    buttons.forEach(b => {
+      const btn = document.createElement("button");
+      btn.textContent = b.t;
+      if (b.c) btn.className = b.c;
+      if (b.cls) btn.className += " " + b.cls;
+      grid.appendChild(btn);
+    });
+    content.appendChild(grid);
+  }
 
   screen.classList.add("open");
 }
 
-function goHome() {  
-  document.getElementById("screen").classList.remove("open");  
-}  
+function openWeatherInfo() {
+  const screen = document.getElementById("screen");
+  const title = document.getElementById("appTitle");
+  const content = document.getElementById("appContent");
+  
+  title.textContent = "Cuaca";
+  content.replaceChildren();
 
-/* Jam Real-time */
-function updateClock() {  
-  const now = new Date();  
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = "<strong>Prakiraan Cuaca Jakarta</strong><p style='margin-top:8px; color:#666;'>Suhu saat ini 28°C dengan kelembapan 65%. Angin berhembus lembut 8 km/jam.</p>";
+  content.appendChild(card);
+
+  screen.classList.add("open");
+}
+
+function goHome() {
+  document.getElementById("screen").classList.remove("open");
+}
+
+function updateClock() {
+  const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
-  document.getElementById("statusTime").textContent = `${hours}:${minutes}`;  
-}  
+  document.getElementById("statusTime").textContent = `${hours}:${minutes}`;
+}
 
-setInterval(updateClock, 1000);  
-updateClock();  
-</script>  
-</body>  
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+</body>
 </html>
