@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>iPhone Screen</title>
+<title>Mavin's iPhone Home Screen</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 @import url('https://fonts.cdnfonts.com/css/sf-pro-display-chrome');
@@ -32,6 +32,7 @@ html, body {
   user-select: none;
 }
 
+/* Screen Container Tanpa Frame HP */
 .phone {
   position: relative;
   width: 100%;
@@ -43,6 +44,7 @@ html, body {
   flex-direction: column;
 }
 
+/* Wallpaper Asli Kamu */
 .wallpaper {
   position: absolute;
   inset: 0;
@@ -52,6 +54,7 @@ html, body {
   background-position: center;
 }
 
+/* Dynamic Island */
 .dynamic-island {
   position: absolute;
   top: 11px;
@@ -76,6 +79,7 @@ html, body {
   box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
 }
 
+/* Status Bar */
 .statusbar {
   height: 48px;
   padding: 14px 26px 0;
@@ -96,20 +100,21 @@ html, body {
   font-size: 13px;
 }
 
+/* Widget Weather / Cuaca Atas */
 .widget-area {
-  margin: 12px 18px 0;
+  margin: 10px 18px 0;
   z-index: 10;
 }
 
 .weather-widget {
-  background: rgba(30, 30, 30, 0.4);
+  background: rgba(35, 35, 38, 0.45);
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 22px;
-  padding: 16px 20px;
+  padding: 14px 18px;
   color: white;
   border: 0.5px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
@@ -120,13 +125,14 @@ html, body {
 }
 
 .city-name {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   letter-spacing: -0.2px;
+  opacity: 0.9;
 }
 
 .weather-temp {
-  font-size: 44px;
+  font-size: 42px;
   font-weight: 200;
   line-height: 1;
   margin-top: 2px;
@@ -144,14 +150,91 @@ html, body {
   opacity: 0.75;
 }
 
-.apps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 22px;
-  column-gap: 12px;
-  padding: 22px 18px 0;
+/* Main Grid Layout */
+.grid-container {
+  padding: 16px 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   flex: 1;
   z-index: 10;
+}
+
+/* Baris 1: WhatsApp, Calendar, & Sleep Sounds Widget */
+.row-1 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.widget-music-medium {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(135deg, #6038d0 0%, #3f1e96 100%);
+  border-radius: 22px;
+  padding: 14px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  border: 0.5px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+.music-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.music-cover {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #111;
+  background-image: radial-gradient(circle, #fff 10%, transparent 11%);
+  background-size: 6px 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.music-info {
+  margin-top: 8px;
+}
+
+.music-title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.music-sub {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.music-btn {
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 0;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Baris-baris Grid Aplikasi */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 18px;
+  column-gap: 12px;
 }
 
 .app {
@@ -162,8 +245,10 @@ html, body {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 
+/* Squircle Icon iOS */
 .app-icon {
   width: 60px;
   height: 60px;
@@ -171,7 +256,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.22);
   font-size: 28px;
   color: white;
   position: relative;
@@ -190,10 +275,59 @@ html, body {
   white-space: nowrap;
 }
 
-.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-.spotify { background: #1ed760; color: #000; }
-.youtube { background: #ff0000; }
-.notes { background: #ffffff; color: #333; position: relative; }
+/* Badge Notifikasi Merah iOS */
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  background: #ff3b30;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 5;
+}
+
+/* Custom Icon Styling Sesuai Gambarmu */
+.wa { background: #25d366; font-size: 32px; }
+.calendar { 
+  background: #ffffff; 
+  color: #000; 
+  flex-direction: column; 
+  justify-content: center;
+  gap: 0;
+}
+.cal-day { font-size: 10px; color: #ff3b30; font-weight: 700; text-transform: uppercase; }
+.cal-date { font-size: 24px; font-weight: 300; line-height: 1; }
+
+.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); font-size: 32px; }
+.xapp { background: #000000; color: #ffffff; font-size: 24px; font-weight: bold; border: 0.5px solid rgba(255,255,255,0.15); }
+.spotify { background: #1ed760; color: #000; font-size: 32px; }
+
+.photos { 
+  background: #ffffff; 
+  color: #ff3b30;
+  position: relative;
+}
+.photos-flower {
+  font-size: 32px;
+  background: conic-gradient(#ff3b30, #ff9f0a, #ffd60a, #34c759, #007aff, #5856d6, #ff2d55, #ff3b30);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.notes { 
+  background: #ffffff; 
+  color: #333; 
+  position: relative;
+}
 .notes::before {
   content: "";
   position: absolute;
@@ -201,13 +335,16 @@ html, body {
   height: 12px;
   background: #ffd60a;
 }
-.xapp { background: #000000; color: #ffffff; font-size: 24px; font-weight: bold; }
-.pin { background: #e60023; }
-.sudoku { background: linear-gradient(135deg, #007aff, #0040dd); color: #fff; }
-.photos-bg { background: #fff; color: #ff3b30; }
-.calc { background: #1c1c1e; color: #ff9f0a; }
-.wa { background: #25d366; }
+.notes-lines {
+  width: 70%;
+  height: 2px;
+  background: #e5e5ea;
+  box-shadow: 0 6px 0 #e5e5ea, 0 12px 0 #e5e5ea;
+}
 
+.youtube { background: #ffffff; color: #ff0000; font-size: 30px; }
+
+/* Dock Bawah */
 .dock-container {
   padding: 0 12px 20px;
   z-index: 10;
@@ -228,6 +365,36 @@ html, body {
 .dock .app-label { display: none; }
 .dock .app-icon { width: 60px; height: 60px; margin: auto; }
 
+.camera { background: linear-gradient(180deg, #e5e5ea 0%, #d1d1d6 100%); color: #1c1c1e; font-size: 28px; }
+.calc { background: #e5e5ea; color: #000; position: relative; }
+.calc-inner {
+  width: 32px;
+  height: 42px;
+  background: #1c1c1e;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  gap: 3px;
+}
+.calc-screen { width: 100%; height: 10px; background: #636366; border-radius: 2px; }
+.calc-dots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 100%; }
+.calc-dot { aspect-ratio: 1; border-radius: 50%; background: #a5a5a5; }
+.calc-dot.o { background: #ff9f0a; }
+
+.gmail { background: #ffffff; }
+.gmail-m {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4285f4 0%, #ea4335 40%, #fbbc05 70%, #34a853 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.settings { background: linear-gradient(180deg, #8e8e93 0%, #636366 100%); color: #e5e5ea; font-size: 30px; }
+
+/* Home Indicator */
 .home-indicator {
   position: absolute;
   bottom: 6px;
@@ -240,6 +407,7 @@ html, body {
   z-index: 25;
 }
 
+/* Halaman Aplikasi Slide Open */
 .screen {
   position: absolute;
   inset: 0;
@@ -293,55 +461,6 @@ html, body {
   margin-bottom: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-
-.calc-display {
-  background: #000;
-  color: #fff;
-  font-size: 52px;
-  text-align: right;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  font-weight: 300;
-}
-
-.calc-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.calc-grid button {
-  aspect-ratio: 1;
-  border: 0;
-  border-radius: 50%;
-  background: #333333;
-  font-size: 22px;
-  color: #fff;
-  cursor: pointer;
-}
-
-.calc-grid button.op { background: #ff9f0a; color: #fff; }
-.calc-grid button.fn { background: #a5a5a5; color: #000; }
-.calc-grid button.zero { border-radius: 40px; aspect-ratio: auto; grid-column: span 2; text-align: left; padding-left: 26px; }
-
-.sudoku-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-top: 15px;
-}
-
-.sudoku-grid button {
-  aspect-ratio: 1;
-  border: 1px solid #d1d1d6;
-  background: white;
-  color: var(--ios-blue);
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-}
 </style>
 </head>
 <body>
@@ -349,12 +468,14 @@ html, body {
 <main class="phone">
   <div class="wallpaper"></div>
   
+  <!-- Dynamic Island -->
   <div class="dynamic-island">
     <div class="camera-lens"></div>
   </div>
 
+  <!-- Status Bar -->
   <div class="statusbar">
-    <span id="statusTime">09:41</span>
+    <span id="statusTime">9:41</span>
     <div class="status-icons">
       <i class="fa-solid fa-signal"></i>
       <i class="fa-solid fa-wifi"></i>
@@ -362,28 +483,149 @@ html, body {
     </div>
   </div>
 
+  <!-- Widget Cuaca Cupertino -->
   <section class="widget-area">
-    <div class="weather-widget" onclick="openWeatherInfo()">
+    <div class="weather-widget" onclick="openApp({name:'Weather', desc:'Cuaca Hari Ini'})">
       <div class="weather-top">
         <div>
-          <div class="city-name">Jakarta</div>
-          <div class="weather-temp">28°</div>
+          <div class="city-name">Cupertino</div>
+          <div class="weather-temp">61°</div>
         </div>
-        <div style="font-size: 32px;">⛅</div>
+        <div style="font-size: 30px;">☁️</div>
       </div>
-      <div class="weather-condition">Cerah Berawan</div>
-      <div class="weather-hl">T:32° L:24°</div>
+      <div class="weather-condition">Cloudy</div>
+      <div class="weather-hl">H:62° L:52°</div>
     </div>
   </section>
 
-  <section class="apps" id="apps"></section>
-  
-  <div class="dock-container">
-    <section class="dock" id="dock"></section>
+  <!-- Area Grid Utama -->
+  <div class="grid-container">
+    
+    <!-- Row 1: WA, Calendar + Sleep Sounds Widget -->
+    <div class="row-1">
+      <button class="app" onclick="openApp({name:'WhatsApp', desc:'Aplikasi WhatsApp Mavin'})">
+        <div class="app-icon wa">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <span class="app-label">WhatsApp</span>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Calendar', desc:'Kalender & Acara'})">
+        <div class="app-icon calendar">
+          <span class="cal-day">TUE</span>
+          <span class="cal-date">9</span>
+        </div>
+        <span class="app-label">Calendar</span>
+      </button>
+
+      <!-- Medium Widget Sleep Sounds -->
+      <div class="widget-music-medium" onclick="openApp({name:'Ambient Music', desc:'Sleep Sounds — Sleep'})">
+        <div class="music-top">
+          <div class="music-cover"></div>
+          <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 14px; opacity:0.8;"></i>
+        </div>
+        <div class="music-info">
+          <div class="music-title">Sleep Sounds</div>
+          <div class="music-sub">Sleep</div>
+          <div class="music-btn">
+            <i class="fa-solid fa-play" style="font-size: 10px;"></i> Play
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Instagram (Notification 6) & X -->
+    <div class="apps-grid">
+      <button class="app" onclick="openApp({name:'Instagram', desc:'Pemberitahuan & Feed Instagram'})">
+        <div class="badge">6</div>
+        <div class="app-icon ig">
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+        <span class="app-label">Instagram</span>
+      </button>
+
+      <button class="app" onclick="openApp({name:'X', desc:'Akun Pribadi X / Twitter'})">
+        <div class="app-icon xapp">
+          𝕏
+        </div>
+        <span class="app-label">X</span>
+      </button>
+    </div>
+
+    <!-- Row 3: Spotify, Photos, Notes, YouTube (Notification 4) -->
+    <div class="apps-grid">
+      <button class="app" onclick="openApp({name:'Spotify', desc:'Daftar Putar Musik Spotify'})">
+        <div class="app-icon spotify">
+          <i class="fa-brands fa-spotify"></i>
+        </div>
+        <span class="app-label">Spotify</span>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Photos', desc:'Galeri Foto Apple'})">
+        <div class="app-icon photos">
+          <i class="fa-solid fa-asterisk photos-flower"></i>
+        </div>
+        <span class="app-label">Photos</span>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Notes', desc:'Catatan Pribadi Mavin'})">
+        <div class="app-icon notes">
+          <div class="notes-lines"></div>
+        </div>
+        <span class="app-label">Notes</span>
+      </button>
+
+      <button class="app" onclick="openApp({name:'YouTube', desc:'Streaming Video YouTube'})">
+        <div class="badge">4</div>
+        <div class="app-icon youtube">
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+        <span class="app-label">YouTube</span>
+      </button>
+    </div>
+
   </div>
-  
+
+  <!-- Dock Bawah: Camera, Calculator, Gmail, Settings -->
+  <div class="dock-container">
+    <section class="dock">
+      <button class="app" onclick="openApp({name:'Camera', desc:'Kamera iPhone'})">
+        <div class="app-icon camera">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Calculator', desc:'Kalkulator iOS'})">
+        <div class="app-icon calc">
+          <div class="calc-inner">
+            <div class="calc-screen"></div>
+            <div class="calc-dots">
+              <div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot o"></div>
+              <div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot o"></div>
+              <div class="calc-dot"></div><div class="calc-dot"></div><div class="calc-dot o"></div>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Gmail', desc:'Pesan Masuk Gmail'})">
+        <div class="app-icon gmail">
+          <span class="gmail-m">M</span>
+        </div>
+      </button>
+
+      <button class="app" onclick="openApp({name:'Settings', desc:'Pengaturan Sistem iPhone'})">
+        <div class="app-icon settings">
+          <i class="fa-solid fa-gear"></i>
+        </div>
+      </button>
+    </section>
+  </div>
+
+  <!-- Home Indicator -->
   <div class="home-indicator" onclick="goHome()"></div>
 
+  <!-- Screen Aplikasi -->
   <section class="screen" id="screen">
     <header class="screen-top">
       <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Beranda</button>
@@ -395,36 +637,6 @@ html, body {
 </main>
 
 <script>
-const applications = [
-  {name:"Instagram", icon:"fa-brands fa-instagram", cls:"ig", desc:"Foto & Reel Mavin"},
-  {name:"Spotify", icon:"fa-brands fa-spotify", cls:"spotify", desc:"Daftar Putar Musik Mavin"},
-  {name:"YouTube", icon:"fa-brands fa-youtube", cls:"youtube", desc:"aespa — Lemonade"},
-  {name:"Notes", icon:"fa-solid fa-align-left", cls:"notes", desc:"Catatan Rahasia Mavin"},
-  {name:"X", icon:"fa-solid fa-x", cls:"xapp", desc:"Akun Pribadi Mavin"},
-  {name:"Pinterest", icon:"fa-brands fa-pinterest", cls:"pin", desc:"Inspirasi Mavin"},
-  {name:"Sudoku", icon:"fa-solid fa-grip", cls:"sudoku", desc:"Game Sudoku Interaktif"},
-  {name:"Kalkulator", icon:"fa-solid fa-calculator", cls:"calc", desc:"Kalkulator Sederhana", dock:true},
-  {name:"WhatsApp", icon:"fa-brands fa-whatsapp", cls:"wa", desc:"Pesan WhatsApp", dock:true},
-  {name:"Foto", icon:"fa-solid fa-images", cls:"photos-bg", desc:"Galeri Foto Mavin", dock:true},
-  {name:"Catatan", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Cepat Mavin", dock:true}
-];
-
-function makeApp(app) {
-  const button = document.createElement("button");
-  button.className = "app";
-  button.setAttribute("aria-label", app.name);
-  button.innerHTML = `<div class="app-icon ${app.cls}">
-      <i class="${app.icon}"></i>
-    </div><span class="app-label">${app.name}</span>`;
-  button.addEventListener("click", () => openApp(app));
-  return button;
-}
-
-applications.forEach(app => {
-  document.getElementById(app.dock ? "dock" : "apps")
-    .appendChild(makeApp(app));
-});
-
 function openApp(app) {
   const screen = document.getElementById("screen");
   const title = document.getElementById("appTitle");
@@ -438,61 +650,6 @@ function openApp(app) {
   const heading = document.createElement("strong");
   heading.textContent = app.desc;
   card.appendChild(heading);
-  content.appendChild(card);
-
-  if (app.name === "Sudoku") {
-    const grid = document.createElement("div");
-    grid.className = "sudoku-grid";
-    for (let i = 0; i < 9; i++) {
-      const cell = document.createElement("button");
-      cell.textContent = i + 1;
-      cell.onclick = () => {
-        cell.textContent = cell.textContent === "·" ? i + 1 : "·";
-      };
-      grid.appendChild(cell);
-    }
-    content.appendChild(grid);
-  }
-
-  if (app.name === "Kalkulator") {
-    const display = document.createElement("div");
-    display.className = "calc-display";
-    display.textContent = "0";
-    content.appendChild(display);
-
-    const grid = document.createElement("div");
-    grid.className = "calc-grid";
-    const buttons = [
-      {t:"AC", c:"fn"}, {t:"+/−", c:"fn"}, {t:"%", c:"fn"}, {t:"÷", c:"op"},
-      {t:"7"}, {t:"8"}, {t:"9"}, {t:"×", c:"op"},
-      {t:"4"}, {t:"5"}, {t:"6"}, {t:"-", c:"op"},
-      {t:"1"}, {t:"2"}, {t:"3"}, {t:"+", c:"op"},
-      {t:"0", cls:"zero"}, {t:","}, {t:"=", c:"op"}
-    ];
-    buttons.forEach(b => {
-      const btn = document.createElement("button");
-      btn.textContent = b.t;
-      if (b.c) btn.className = b.c;
-      if (b.cls) btn.className += " " + b.cls;
-      grid.appendChild(btn);
-    });
-    content.appendChild(grid);
-  }
-
-  screen.classList.add("open");
-}
-
-function openWeatherInfo() {
-  const screen = document.getElementById("screen");
-  const title = document.getElementById("appTitle");
-  const content = document.getElementById("appContent");
-  
-  title.textContent = "Cuaca";
-  content.replaceChildren();
-
-  const card = document.createElement("div");
-  card.className = "card";
-  card.innerHTML = "<strong>Prakiraan Cuaca Jakarta</strong><p style='margin-top:8px; color:#666;'>Suhu saat ini 28°C dengan kelembapan 65%. Angin berhembus lembut 8 km/jam.</p>";
   content.appendChild(card);
 
   screen.classList.add("open");
