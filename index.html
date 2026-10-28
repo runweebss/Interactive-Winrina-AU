@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
 <meta name="theme-color" content="#1a1a1a">  
 <title>Mavin's iPhone</title>  
-<!-- Font Awesome untuk Ikon Aplikasi iOS Asli -->
+<!-- Font Awesome untuk Ikon Aplikasi -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>  
 :root {  
   --text: #ffffff;  
-  --glass: rgba(255, 255, 255, 0.25);  
   --blue: #007aff;  
 }  
 
@@ -22,38 +21,36 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background: #111;
+  height: 100dvh;
+  width: 100vw;
+  background: #000;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   user-select: none;
 }
 
-/* Frame HP Rasio 9:16 */
+/* Frame HP Full Screen Tanpa Kolom Pembatas Luar */
 .phone {
   position: relative;
-  width: min(100vw, 414px);
-  height: min(100vh, 736px);
-  aspect-ratio: 9 / 16;
-  background: #1e1e1e;
-  border-radius: 48px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 12px #2d2d2d, 0 0 0 13px #404040;
+  width: 100%;
+  height: 100%;
+  max-width: 430px;
+  margin: auto;
   overflow: hidden;
   isolation: isolate;
   display: flex;
   flex-direction: column;
 }
 
-/* Wallpaper iOS */
+/* Wallpaper Sesuai Permintaan */
 .wallpaper {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: radial-gradient(circle at 20% 20%, #4a5568 0%, #1a202c 100%),
-              linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.3)),
+    url("https://raw.githubusercontent.com/runweebss/Interactive-Winrina-AU/77a13efeca6540e53a428aa92e2f87b515867049/camera-wallpaper.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -61,134 +58,98 @@ html, body {
 /* Dynamic Island */
 .dynamic-island {
   position: absolute;
-  top: 10px;
+  top: 11px;
   left: 50%;
   transform: translateX(-50%);
-  width: 110px;
-  height: 30px;
+  width: 115px;
+  height: 32px;
   background: #000;
   border-radius: 20px;
   z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.dynamic-island:active {
-  width: 200px;
-  height: 35px;
+  padding: 0 10px;
 }
 
 .camera-lens {
-  width: 12px;
-  height: 12px;
-  background: #0d0d0d;
+  width: 11px;
+  height: 11px;
+  background: #111;
   border-radius: 50%;
-  box-shadow: inset 0 0 2px rgba(255,255,255,0.2);
 }
 
 /* Status Bar */
 .statusbar {
-  height: 44px;
-  padding: 12px 24px 0;
+  height: 48px;
+  padding: 14px 28px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #fff;
   z-index: 9;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .status-icons {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
-/* Area Widget Jam Layar Utama */
+/* Widget Tanggal & Cuaca Interaktif */
 .widget-area {
-  margin: 15px 20px 5px;
-  display: flex;
-  gap: 15px;
+  margin: 18px 20px 0;
 }
 
-.widget-clock {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.2);
+.weather-widget {
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-radius: 22px;
-  padding: 16px;
+  border-radius: 24px;
+  padding: 16px 20px;
   color: white;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  height: 140px;
-}
-
-.widget-title {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  opacity: 0.8;
-}
-
-.analog-clock {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.2);
-  border: 2px solid rgba(255,255,255,0.8);
-  position: relative;
-  margin: auto;
-}
-
-.hand {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom center;
-  background: white;
-  border-radius: 4px;
-}
-
-.hour-hand { width: 3px; height: 18px; }
-.minute-hand { width: 2px; height: 25px; }
-.second-hand { width: 1px; height: 28px; background: #ff3b30; }
-
-.widget-date {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 22px;
-  padding: 16px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 140px;
-  height: 140px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
 
-.widget-date .day { font-size: 14px; font-weight: 600; color: #ff3b30; text-transform: uppercase; }
-.widget-date .num { font-size: 48px; font-weight: 300; line-height: 1; margin: 4px 0; }
+.weather-widget:active { transform: scale(0.97); }
+
+.weather-info .date-text {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.weather-info .temp-desc {
+  font-size: 28px;
+  font-weight: 300;
+  margin-top: 2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.weather-icon {
+  font-size: 38px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
 
 /* Grid Aplikasi */
 .apps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px 12px;
-  padding: 15px 20px;
+  gap: 20px 12px;
+  padding: 24px 20px 0;
   flex: 1;
 }
 
@@ -203,69 +164,90 @@ html, body {
 }
 
 .app-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 14px;
+  width: min(64px, 16vw);
+  height: min(64px, 16vw);
+  border-radius: 22%;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  font-size: 26px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 28px;
   color: white;
-  transition: transform 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.12s ease;
 }
 
 .app:active .app-icon { transform: scale(0.88); }
 
 .app-label {
   margin-top: 6px;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: -0.2px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 1px 5px rgba(0,0,0,0.8);
 }
 
-/* Desain Spesifik Icon iOS */
-.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
-.spotify { background: #1ed760; }
+/* Desain Kustom Ikon Mirip iOS Asli */
+.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.spotify { background: #1ed760; color: #000; }
 .youtube { background: #ff0000; }
-.notes { background: #fafdbe; color: #333; }
-.xapp { background: #000; }
+.notes { 
+  background: linear-gradient(180deg, #ffffff 0%, #f2f2f7 100%); 
+  color: #333; 
+  box-shadow: inset 0 3px 0 #ffcc00, 0 4px 12px rgba(0,0,0,0.3);
+}
+.notes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: #ffcc00;
+}
+.xapp { background: #000; font-weight: bold; }
 .pin { background: #e60023; }
-.sudoku { background: #e5e5ea; color: #007aff; }
-.photos { background: #ffffff; color: #333; }
-.safari { background: linear-gradient(180deg, #34aadc 0%, #007aff 100%); }
-.memo { background: #e5e5ea; color: #333; }
+.sudoku { 
+  background: linear-gradient(135deg, #4372e6 0%, #1d4ed8 100%); 
+  color: #fff; 
+  font-size: 22px; 
+  font-weight: 700;
+}
+.photos { background: #ffffff; color: #ff3b30; }
+.calc { background: #f2994a; color: #fff; }
 .wa { background: #25d366; }
 
 /* Dock */
 .dock {
-  margin: 0 16px 16px;
-  padding: 10px;
+  margin: 0 16px 20px;
+  padding: 12px 8px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.25);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .dock .app-label { display: none; }
-.dock .app-icon { width: 54px; height: 54px; margin: auto; }
+.dock .app-icon { width: 60px; height: 60px; margin: auto; }
 
 /* Home Indicator */
 .home-indicator {
   position: absolute;
-  bottom: 8px;
+  bottom: 6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 130px;
+  width: 134px;
   height: 5px;
   border-radius: 10px;
   background: white;
   z-index: 20;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 /* Layar Dalam Aplikasi */
@@ -282,7 +264,7 @@ html, body {
 .screen.open { display: flex; }
 
 .screen-top {
-  padding: 50px 16px 12px;
+  padding: 54px 16px 12px;
   background: rgba(249, 249, 249, 0.94);
   backdrop-filter: blur(20px);
   border-bottom: 0.5px solid rgba(0,0,0,0.1);
@@ -300,6 +282,7 @@ html, body {
   align-items: center;
   gap: 4px;
   padding: 0;
+  cursor: pointer;
 }
 
 .screen h2 {
@@ -316,7 +299,7 @@ html, body {
 
 .card {
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px;
   margin-bottom: 12px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -324,13 +307,42 @@ html, body {
 
 .muted { color: #8e8e93; font-size: 13px; }
 
+/* Tampilan Kalkulator */
+.calc-display {
+  background: #000;
+  color: #fff;
+  font-size: 42px;
+  text-align: right;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.calc-grid button {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: #e5e5ea;
+  font-size: 20px;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+}
+.calc-grid button.op { background: #ff9f0a; color: #fff; }
+.calc-grid button.fn { background: #d1d1d6; color: #000; }
+
+/* Sudoku Grid */
 .sudoku-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
   margin-top: 15px;
 }
-
 .sudoku-grid button {
   aspect-ratio: 1;
   border: 1px solid #d1d1d6;
@@ -339,6 +351,7 @@ html, body {
   font-size: 20px;
   font-weight: 600;
   border-radius: 8px;
+  cursor: pointer;
 }
 </style>  
 </head>  
@@ -347,14 +360,14 @@ html, body {
 <main class="phone">  
   <div class="wallpaper"></div> 
   
-  <!-- Dynamic Island iOS -->
+  <!-- Dynamic Island -->
   <div class="dynamic-island">
     <div class="camera-lens"></div>
   </div>   
 
   <!-- Status Bar -->
   <div class="statusbar">  
-    <span id="statusTime">00:00</span>  
+    <span id="statusTime">09:41</span>  
     <div class="status-icons">  
       <i class="fa-solid fa-signal"></i>
       <i class="fa-solid fa-wifi"></i>
@@ -362,19 +375,14 @@ html, body {
     </div>  
   </div>    
 
-  <!-- Widget Area Layar Utama -->
+  <!-- Widget Tanggal & Cuaca Interaktif -->
   <section class="widget-area">
-    <div class="widget-clock">
-      <span class="widget-title">Jam</span>
-      <div class="analog-clock">
-        <div class="hand hour-hand" id="hourHand"></div>
-        <div class="hand minute-hand" id="minHand"></div>
-        <div class="hand second-hand" id="secHand"></div>
+    <div class="weather-widget" onclick="openWeatherInfo()">
+      <div class="weather-info">
+        <div class="date-text" id="widgetDateText">Rabu, 28 Oktober</div>
+        <div class="temp-desc">28°C • Cerah Berawan</div>
       </div>
-    </div>
-    <div class="widget-date">
-      <span class="day" id="widgetDay">RAB</span>
-      <span class="num" id="widgetNum">28</span>
+      <div class="weather-icon">⛅</div>
     </div>
   </section>
 
@@ -390,7 +398,7 @@ html, body {
   <!-- Window Aplikasi -->
   <section class="screen" id="screen">  
     <header class="screen-top">  
-      <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Cerita</button>  
+      <button class="back" onclick="goHome()"><i class="fa-solid fa-chevron-left"></i> Beranda</button>  
       <h2 id="appTitle">Aplikasi</h2>  
       <span style="width: 50px;"></span>
     </header>  
@@ -406,11 +414,11 @@ const applications = [
   {name:"Notes", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Rahasia Mavin"},  
   {name:"X", icon:"fa-brands fa-x-twitter", cls:"xapp", desc:"Akun Pribadi Mavin"},  
   {name:"Pinterest", icon:"fa-brands fa-pinterest", cls:"pin", desc:"Inspirasi Mavin"},  
-  {name:"Sudoku", icon:"fa-solid fa-grip-9", cls:"sudoku", desc:"Game Sudoku Interaktif"},  
-  {name:"Foto", icon:"fa-solid fa-images", cls:"photos", desc:"Galeri Foto Mavin", dock:true},  
+  {name:"Sudoku", icon:"fa-solid fa-table-cells", cls:"sudoku", desc:"Game Sudoku Interaktif"},  
+  {name:"Kalkulator", icon:"fa-solid fa-calculator", cls:"calc", desc:"Kalkulator Sederhana", dock:true},  
   {name:"WhatsApp", icon:"fa-brands fa-whatsapp", cls:"wa", desc:"Pesan WhatsApp", dock:true},  
-  {name:"Safari", icon:"fa-brands fa-safari", cls:"safari", desc:"Peramban Web", dock:true},  
-  {name:"Memo", icon:"fa-solid fa-pen-to-square", cls:"memo", desc:"Catatan Cepat", dock:true}  
+  {name:"Foto", icon:"fa-solid fa-images", cls:"photos", desc:"Galeri Foto Mavin", dock:true},  
+  {name:"Notes Dock", icon:"fa-solid fa-note-sticky", cls:"notes", desc:"Catatan Cepat Mavin", dock:true}  
 ];  
 
 function makeApp(app) {  
@@ -446,7 +454,7 @@ function openApp(app) {
 
   const note = document.createElement("p");  
   note.className = "muted";  
-  note.textContent = "Aplikasi berjalan lancar di iPhone Mavin.";  
+  note.textContent = "Berjalan lancar di iPhone Mavin.";  
   content.appendChild(note);  
 
   if (app.name === "Sudoku") {  
@@ -463,8 +471,45 @@ function openApp(app) {
     content.appendChild(grid);  
   }  
 
+  if (app.name === "Kalkulator") {  
+    const display = document.createElement("div");  
+    display.className = "calc-display";  
+    display.id = "calcDisplay";  
+    display.textContent = "0";  
+    content.appendChild(display);  
+
+    const grid = document.createElement("div");  
+    grid.className = "calc-grid";  
+    const buttons = ["C","±","%","÷","7","8","9","×","4","5","6","-","1","2","3","+","0",",","="];  
+    buttons.forEach(text => {  
+      const btn = document.createElement("button");  
+      btn.textContent = text;  
+      if(["÷","×","-","+","="].includes(text)) btn.className = "op";  
+      if(["C","±","%"].includes(text)) btn.className = "fn";  
+      if(text === "0") btn.style.gridColumn = "span 2";  
+      grid.appendChild(btn);  
+    });  
+    content.appendChild(grid);  
+  }  
+
   screen.classList.add("open");  
 }  
+
+function openWeatherInfo() {
+  const screen = document.getElementById("screen");  
+  const title = document.getElementById("appTitle");  
+  const content = document.getElementById("appContent");  
+  
+  title.textContent = "Cuaca";  
+  content.replaceChildren();  
+
+  const card = document.createElement("div");  
+  card.className = "card";  
+  card.innerHTML = "<strong>Prakiraan Cuaca Hari Ini</strong><p class='muted' style='margin-top:8px;'>Suhu: 28°C, Kelembapan: 65%<br>Kondisi: Cerah berawan di area Mavin's iPhone.</p>";  
+  content.appendChild(card);  
+
+  screen.classList.add("open");
+}
 
 function goHome() {  
   document.getElementById("screen").classList.remove("open");  
@@ -473,29 +518,12 @@ function goHome() {
 /* Sistem Pembaruan Waktu Real-Time */
 function updateClock() {  
   const now = new Date();  
-  
-  // Update Jam Status Bar
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   document.getElementById("statusTime").textContent = `${hours}:${minutes}`;  
   
-  // Update Jam Analog Widget
-  const sec = now.getSeconds();
-  const min = now.getMinutes();
-  const hr = now.getHours();
-  
-  const secDeg = (sec / 60) * 360;
-  const minDeg = ((min + sec / 60) / 60) * 360;
-  const hrDeg = ((hr % 12 + min / 60) / 12) * 360;
-  
-  document.getElementById("secHand").style.transform = `rotate(${secDeg}deg)`;
-  document.getElementById("minHand").style.transform = `rotate(${minDeg}deg)`;
-  document.getElementById("hourHand").style.transform = `rotate(${hrDeg}deg)`;
-  
-  // Update Tanggal Widget
-  const days = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
-  document.getElementById("widgetDay").textContent = days[now.getDay()];
-  document.getElementById("widgetNum").textContent = now.getDate();
+  const options = { weekday: 'long', day: 'numeric', month: 'long' };
+  document.getElementById("widgetDateText").textContent = now.toLocaleDateString('id-ID', options);
 }  
 
 setInterval(updateClock, 1000);  
