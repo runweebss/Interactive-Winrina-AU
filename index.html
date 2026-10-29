@@ -1,337 +1,436 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Mavin's Phone</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-@import url('https://fonts.cdnfonts.com/css/sf-pro-display-chrome');
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone Home Screen</title>
 
+<style>
 * {
   box-sizing: border-box;
+}
+
+body {
   margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  background: #f5f5f5;
+  color: white;
 }
 
-html, body {
-  height: 100%;
+.home-screen {
   width: 100%;
-  background: #111;
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  user-select: none;
-}
-
-/* Container HP agar UI Presisi di Layar Apa pun */
-.phone-container {
-  position: relative;
-  width: 100%;
-  max-width: 414px;
-  height: 100%;
-  max-height: 896px;
-  background: #000;
-  overflow: hidden;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: auto;
+  padding: 35px 22px 25px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
-/* Wallpaper Background */
-.wallpaper {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image: url("https://raw.githubusercontent.com/runweebss/Interactive-Winrina-AU/77a13efeca6540e53a428aa92e2f87b515867049/camera-wallpaper.jpg");
-  background-size: cover;
-  background-position: center;
+/* WEATHER WIDGET */
+.weather {
+  width: 100%;
+  min-height: 190px;
+  padding: 20px;
+  border-radius: 28px;
+  background: rgba(90, 100, 120, 0.78);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Dynamic Island / Notch Atas */
-.dynamic-island {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 28px;
-  background: #000;
-  border-radius: 20px;
-  z-index: 25;
-}
-
-/* Status Bar Baris Atas */
-.statusbar {
-  height: 44px;
-  padding: 12px 24px 0;
+.weather-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  z-index: 20;
+  align-items: flex-start;
 }
 
-.status-right {
+.city {
+  font-size: 15px;
+  opacity: .85;
+}
+
+.temperature {
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.weather-info {
+  text-align: right;
+  font-size: 13px;
+}
+
+.forecast {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  font-size: 11px;
+  gap: 4px;
+}
+
+.forecast div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* APPLICATION GRID */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 94px 94px 108px;
+  column-gap: 12px;
+  row-gap: 20px;
+  align-items: start;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.app-icon {
+  width: 100%;
+  max-width: 76px;
+  aspect-ratio: 1;
+  border-radius: 19px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  position: relative;
+  color: white;
+  font-size: 37px;
+  font-weight: 600;
+  box-shadow: 0 3px 8px #00000012;
+}
+
+.app-name {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px #00000040;
+}
+
+.badge {
+  position: absolute;
+  top: -7px;
+  right: -5px;
+  min-width: 23px;
+  height: 23px;
+  border-radius: 20px;
+  background: #ff3b30;
+  color: white;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffffff55;
+}
+
+/* APP COLORS */
+.whatsapp {
+  background: #16c968;
+  font-size: 38px;
+}
+
+.calendar {
+  background: #fff;
+  color: #ff5149;
+  overflow: hidden;
+}
+
+.calendar strong {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px;
+  background: #ff554d;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+}
+
+.calendar span {
+  margin-top: 13px;
+  font-size: 33px;
+  color: #333;
+}
+
+.instagram {
+  background: linear-gradient(
+    35deg, #ffdc80, #fcaf45,
+    #f77737, #e1306c, #833ab4, #405de6
+  );
+}
+
+.x-app {
+  background: #080808;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+}
+
+.spotify {
+  background: #080808;
+  color: #1ed760;
+  font-size: 43px;
+}
+
+.photos {
+  background: #fff;
+  color: #ff554c;
+  font-size: 38px;
+}
+
+.notes {
+  background: linear-gradient(
+    to bottom, #ffcf42 0 19%, #fff 19% 100%
+  );
+  color: #666;
+  font-size: 28px;
+}
+
+.youtube {
+  background: #fff;
+  color: #ff0808;
+  font-size: 36px;
+}
+
+/* MUSIC WIDGET */
+.music-widget {
+  grid-column: 3 / 5;
+  grid-row: 1 / 3;
+  height: 208px;
+  border-radius: 25px;
+  padding: 14px;
+  background: linear-gradient(145deg, #a34aff, #5411ce);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.music-cover {
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #222, #888);
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+
+.music-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.music-subtitle {
+  font-size: 11px;
+  opacity: .8;
+  margin-top: 3px;
+}
+
+.play-button {
+  width: fit-content;
+  border-radius: 30px;
+  background: #ffffff25;
+  padding: 8px 13px;
   font-size: 12px;
 }
 
-/* Widget Cuaca / Info Atas */
-.widget-section {
-  margin: 10px 18px 0;
-  z-index: 10;
-}
-
-.weather-widget {
-  background: rgba(30, 30, 30, 0.45);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border-radius: 22px;
-  padding: 14px 18px;
-  color: #fff;
-  border: 0.5px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.weather-left .city { font-size: 13px; font-weight: 500; opacity: 0.9; }
-.weather-left .temp { font-size: 38px; font-weight: 200; line-height: 1; margin-top: 2px; }
-.weather-right { text-align: right; }
-.weather-right .desc { font-size: 12px; font-weight: 500; opacity: 0.9; }
-.weather-right .hl { font-size: 11px; opacity: 0.7; margin-top: 2px; }
-
-/* Grid Aplikasi UI Presisi */
-.main-grid {
-  padding: 20px 18px 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px 12px;
+/* LOWER SPACE */
+.empty-space {
   flex: 1;
-  z-index: 10;
+  min-height: 100px;
 }
 
-.app-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-}
-
-/* Ikon Squircle Asli iOS */
-.app-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  transition: transform 0.1s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.app-item:active .app-icon {
-  transform: scale(0.88);
-}
-
-.app-label {
-  margin-top: 5px;
-  font-size: 11px;
-  font-weight: 400;
-  color: #fff;
-  letter-spacing: -0.2px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-  white-space: nowrap;
-}
-
-/* Badge Notifikasi Merah */
-.badge {
-  position: absolute;
-  top: -3px;
-  right: -2px;
-  background: #ff3b30;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  z-index: 5;
-}
-
-/* Styling Warna Ikon iOS */
-.wa { background: #25d366; }
-.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-.xapp { background: #000; border: 0.5px solid rgba(255,255,255,0.2); font-weight: bold; }
-.spotify { background: #1ed760; color: #000; }
-.yt { background: #ff0000; }
-.notes { background: #fff; color: #333; }
-.notes::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: #ffd60a; }
-.photos { background: #fff; color: #ff3b30; }
-
-/* Dock Bawah Glassmorphism */
-.dock-area {
-  padding: 0 12px 20px;
-  z-index: 10;
-}
-
+/* BOTTOM DOCK */
 .dock {
-  padding: 12px 10px;
+  width: 100%;
+  min-height: 92px;
+  padding: 12px 8px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.30);
+  backdrop-filter: blur(25px);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  border-radius: 35px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  align-items: center;
 }
 
-.dock .app-label { display: none; }
+.dock .app-icon {
+  width: 100%;
+  max-width: 68px;
+  border-radius: 20px;
+  font-size: 34px;
+}
 
-.camera { background: linear-gradient(180deg, #e5e5ea 0%, #c7c7cc 100%); color: #1c1c1e; }
-.calc { background: #2c2c2e; color: #ff9f0a; }
-.gmail { background: #fff; color: #ea4335; font-size: 24px; font-weight: 800; }
-.settings { background: linear-gradient(180deg, #8e8e93 0%, #636366 100%); }
+.camera {
+  background: linear-gradient(#f7f7fa, #d8d8df);
+  color: #25252a;
+}
 
-/* Garis Home Indicator iOS */
-.home-indicator {
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
-  border-radius: 10px;
-  background: #fff;
-  z-index: 30;
+.calculator {
+  background: #292929;
+  color: #ff9f0a;
+}
+
+.gmail {
+  background: white;
+  color: #e84135;
+  font-size: 36px;
+}
+
+.settings {
+  background: linear-gradient(#9999a3, #686873);
+  color: white;
+}
+
+@media (max-width: 360px) {
+  .home-screen {
+    padding: 24px 14px 18px;
+    gap: 20px;
+  }
+
+  .apps-grid {
+    column-gap: 8px;
+    grid-template-rows: 84px 84px 96px;
+  }
+
+  .app-name {
+    font-size: 10px;
+  }
+
+  .music-widget {
+    height: 188px;
+  }
+
+  .app-icon {
+    border-radius: 16px;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<div class="phone-container">
-  <div class="wallpaper"></div>
+<main class="home-screen">
 
-  <!-- Dynamic Island -->
-  <div class="dynamic-island"></div>
-
-  <!-- Status Bar -->
-  <div class="statusbar">
-    <span id="time">17:00</span>
-    <div class="status-right">
-      <i class="fa-solid fa-signal"></i>
-      <i class="fa-solid fa-wifi"></i>
-      <i class="fa-solid fa-battery-full"></i>
-    </div>
-  </div>
-
-  <!-- Widget Cuaca -->
-  <div class="widget-section">
-    <div class="weather-widget">
-      <div class="weather-left">
-        <div class="city">Seoul</div>
-        <div class="temp">24°</div>
+  <!-- WEATHER -->
+  <section class="weather">
+    <div class="weather-top">
+      <div>
+        <div class="city">Cupertino</div>
+        <div class="temperature">61°</div>
       </div>
-      <div class="weather-right">
-        <div class="desc">Cerah</div>
-        <div class="hl">H:26° L:18°</div>
+      <div class="weather-info">
+        ☁️<br>
+        Cloudy<br>
+        H:62° L:52°
       </div>
     </div>
-  </div>
 
-  <!-- Grid Aplikasi Utama -->
-  <div class="main-grid">
-    <div class="app-item">
-      <div class="app-icon wa"><i class="fa-brands fa-whatsapp"></i></div>
-      <span class="app-label">WhatsApp</span>
+    <div class="forecast">
+      <div>2 PM <span>☁️</span>61°</div>
+      <div>3 PM <span>☁️</span>62°</div>
+      <div>4 PM <span>☁️</span>61°</div>
+      <div>5 PM <span>☁️</span>62°</div>
+      <div>6 PM <span>☁️</span>62°</div>
+      <div>7 PM <span>☁️</span>61°</div>
+    </div>
+  </section>
+
+  <!-- APPS -->
+  <section class="apps-grid">
+
+    <div class="app">
+      <div class="app-icon whatsapp">◉</div>
+      <span class="app-name">WhatsApp</span>
     </div>
 
-    <div class="app-item">
-      <div class="badge">6</div>
-      <div class="app-icon ig"><i class="fa-brands fa-instagram"></i></div>
-      <span class="app-label">Instagram</span>
-    </div>
-
-    <div class="app-item">
-      <div class="app-icon xapp">𝕏</div>
-      <span class="app-label">X</span>
-    </div>
-
-    <div class="app-item">
-      <div class="app-icon spotify"><i class="fa-brands fa-spotify"></i></div>
-      <span class="app-label">Spotify</span>
-    </div>
-
-    <div class="app-item">
-      <div class="app-icon notes"><i class="fa-solid fa-align-left"></i></div>
-      <span class="app-label">Notes</span>
-    </div>
-
-    <div class="app-item">
-      <div class="badge">4</div>
-      <div class="app-icon yt"><i class="fa-brands fa-youtube"></i></div>
-      <span class="app-label">YouTube</span>
-    </div>
-
-    <div class="app-item">
-      <div class="app-icon photos"><i class="fa-solid fa-images"></i></div>
-      <span class="app-label">Photos</span>
-    </div>
-  </div>
-
-  <!-- Dock Aplikasi Bawah -->
-  <div class="dock-area">
-    <div class="dock">
-      <div class="app-item">
-        <div class="app-icon camera"><i class="fa-solid fa-camera"></i></div>
+    <div class="app">
+      <div class="app-icon calendar">
+        <strong>Tue</strong>
+        <span>9</span>
       </div>
-
-      <div class="app-item">
-        <div class="app-icon calc"><i class="fa-solid fa-calculator"></i></div>
-      </div>
-
-      <div class="app-item">
-        <div class="app-icon gmail">M</div>
-      </div>
-
-      <div class="app-item">
-        <div class="app-icon settings"><i class="fa-solid fa-gear"></i></div>
-      </div>
+      <span class="app-name">Calendar</span>
     </div>
-  </div>
 
-  <!-- Home Indicator -->
-  <div class="home-indicator"></div>
-</div>
+    <!-- MUSIC WIDGET -->
+    <div class="music-widget">
+      <div class="music-cover">♫</div>
+      <div>
+        <div class="music-title">Sleep Sounds</div>
+        <div class="music-subtitle">Sleep</div>
+      </div>
+      <div class="play-button">▶ Play</div>
+    </div>
 
-<script>
-function updateTime() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  document.getElementById("time").textContent = `${hours}:${minutes}`;
-}
-setInterval(updateTime, 1000);
-updateTime();
-</script>
+    <div class="app">
+      <div class="app-icon instagram">◎</div>
+      <span class="app-name">Instagram</span>
+    </div>
+
+    <div class="app">
+      <div class="app-icon x-app">𝕏</div>
+      <span class="app-name">X</span>
+    </div>
+
+    <div class="app">
+      <div class="app-icon spotify">≋</div>
+      <span class="app-name">Spotify</span>
+    </div>
+
+    <div class="app">
+      <div class="app-icon photos">✿</div>
+      <span class="app-name">Photos</span>
+    </div>
+
+    <div class="app">
+      <div class="app-icon notes">☰</div>
+      <span class="app-name">Notes</span>
+    </div>
+
+    <div class="app">
+      <div class="app-icon youtube">▶</div>
+      <span class="app-name">YouTube</span>
+    </div>
+
+  </section>
+
+  <!-- EMPTY SPACE -->
+  <div class="empty-space"></div>
+
+  <!-- DOCK -->
+  <nav class="dock">
+
+    <div class="app">
+      <div class="app-icon camera">📷</div>
+    </div>
+
+    <div class="app">
+      <div class="app-icon calculator">▦</div>
+    </div>
+
+    <div class="app">
+      <div class="app-icon gmail">M</div>
+    </div>
+
+    <div class="app">
+      <div class="app-icon settings">⚙</div>
+    </div>
+
+  </nav>
+
+</main>
 
 </body>
 </html>
